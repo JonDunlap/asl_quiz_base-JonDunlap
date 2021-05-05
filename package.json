@@ -1,0 +1,32 @@
+{
+  "name": "asl_quiz_base-jondunlap",
+  "version": "1.0.0",
+  "description": "[Description]",
+  "main": "index.js",
+  "devDependencies": {
+    "eslint": "^7.25.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "husky": "^6.0.0",
+    "lint-staged": "^10.5.4",
+    "nodemon": "^2.0.7"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "web": "cd web; nodemon server.js",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ASL-WDD442/asl_quiz_base-JonDunlap.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ASL-WDD442/asl_quiz_base-JonDunlap/issues"
+  },
+  "homepage": "https://github.com/ASL-WDD442/asl_quiz_base-JonDunlap#readme",
+  "lint-staged": {
+    "*.js": "eslint --cache --fix"
+  }
+}
