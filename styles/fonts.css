@@ -1,8 +1,8 @@
-@import url("https://fonts.googleapis.com/css?family=Oswald");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap');
 
 :root {
-  --default-font-family: Helvetica, sans-serif;
-  --secondary-font-family: 'Oswald', sans-serif;
+  --default-font-family: 'Roboto', sans-serif;
+  --secondary-font-family: 'Montserrat', sans-serif;
   --default-font: 200 18px/1.25em var(--default-font-family);
 }
 
@@ -34,9 +34,9 @@ html {
   padding: 4px 5px;
   text-decoration: none;
   text-transform: uppercase;
-  color: var(--active-color);
+  color: var(--primary-color);
   border: none;
-  border-bottom: 1px solid var(--active-color);
+  border-bottom: 1px solid var(--primary-color);
   outline: none;
   background: none;
 }
@@ -50,8 +50,8 @@ html {
 }
 
 .linkSecondary {
-  color: var(--primary-color);
-  border-color: var(--primary-color);
+  color: var(--secondary-color);
+  border-color: var(--secondary-color);
 }
 
 .button {
@@ -62,7 +62,7 @@ html {
   padding: 10px 40px;
   text-decoration: none;
   text-transform: uppercase;
-  color: var(--light-text-color);
+  color: var(--text-color);
   border: none;
   outline: none;
 }
