@@ -1,13 +1,13 @@
 :root {
-  --active-color: #2ab7ca;
-  --primary-color: #fe8a71;
-  --secondary-color: #fed766;
-  --text-color: #333;
-  --light-text-color: #fdfdfd;
-  --background-color: #fff;
-  --border-color: #e6e6ea;
-  --secondary-background-color: #f4f4f8;
-  --error-color: #9c3848;
+  --active-color: #4a148c;
+  --primary-color: #7c43bd;
+  --secondary-color: #b388ff;
+  --text-color: #fff;
+  --light-text-color: #000;
+  --background-color: #12005e;
+  --border-color: #805acb;
+  --secondary-background-color: #e7b9ff;
+  --error-color: #b00020;
 }
 
 .active {
