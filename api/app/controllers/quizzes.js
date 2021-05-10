@@ -1,12 +1,19 @@
 // load in the model class from ../models/index.js
 const { Quizzes } = require('../models');
 
-// get all the quizzes
+// get all the quizzes for a given user
 exports.getAllQuizzes = (req, res) => {
+  // get the userId from the request body
+  // const { userId } = req.body;
+
   // run the get all function from the model
   const quizzes = Quizzes.getAll();
 
-  // respond with json of the quizzes
+  // filter the quizzes to only the ones from this user
+  // const userQuizzes = quizzes.filter((quiz) => quiz.userId === userId);
+
+  // respond with json of the quizzes for this user
+  // res.json(userQuizzes);
   res.json(quizzes);
 };
 
