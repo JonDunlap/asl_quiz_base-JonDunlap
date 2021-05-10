@@ -25,7 +25,7 @@ class Model {
     // create a uuid
     const id = uuid();
     // add the item to the array along with the uuid
-    this.values.push({ uuid: id, ...item });
+    this.values.push({ id, ...item });
 
     // return the new id
     return id;
