@@ -5,9 +5,9 @@ const router = require('express').Router();
 const quizzesController = require('../controllers/quizzes');
 
 // GET /quizzes route
-router.get('/', quizzesController.getAll);
+router.get('/', quizzesController.getAllQuizzes);
 // GET /quizzes/public route
-router.get('/public', quizzesController.getPublic);
+router.get('/public', quizzesController.getPublicQuizzes);
 // GET /quizzes/:id
 router.get('/:id', quizzesController.getQuiz);
 // POST /quizzes
