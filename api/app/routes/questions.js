@@ -5,7 +5,7 @@ const router = require('express').Router();
 const questionsController = require('../controllers/questions');
 
 // GET /questions?quizId
-router.get('/', questionsController.getQuestionByQuizId);
+router.get('/', questionsController.getQuestionsByQuizId);
 // GET /questions/:id
 router.get('/:id', questionsController.getQuestion);
 // POST /questions
