@@ -1,7 +1,7 @@
 // load in the model class from ../models/index.js
 const { Questions } = require('../models');
 
-// get all the questions
+// get all the questions from a quiz
 exports.getQuestionsByQuizId = (req, res) => {
   // get the quiz id from the request query
   const { quizId } = req.query;
