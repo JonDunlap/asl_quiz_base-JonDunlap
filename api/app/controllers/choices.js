@@ -41,12 +41,10 @@ exports.getChoice = (req, res) => {
 // create a new choice
 exports.createChoice = (req, res) => {
   // get the value, type, and questionId from the request body
-  // const { value, type, questionId} = req.body;
-  const { value, type } = req.body;
+  const { value, type, questionId } = req.body;
 
   // create the choice and save the id returned from the model
-  // const id = Choices.createNewItem({ value, type, questionId });
-  const id = Choices.createNewItem({ value, type });
+  const id = Choices.createNewItem({ value, type, questionId });
 
   // send the new id back in json
   res.json(id);

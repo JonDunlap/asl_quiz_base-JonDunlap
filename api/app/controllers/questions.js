@@ -41,12 +41,10 @@ exports.getQuestion = (req, res) => {
 // create a new question
 exports.createQuestion = (req, res) => {
   // get the title, and quizId from the request body
-  // const { title, quizId} = req.body;
-  const { title } = req.body;
+  const { title, quizId } = req.body;
 
   // create the question and save the id returned from the model
-  // const id = Questions.createNewItem({ title, quizId });
-  const id = Questions.createNewItem({ title });
+  const id = Questions.createNewItem({ title, quizId });
 
   // send the new id back in json
   res.json(id);
