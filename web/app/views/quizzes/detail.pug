@@ -7,9 +7,10 @@ block content
 		+link('/admin/quizzes/delete/'+quiz.id, 'Delete', 'fa-trash', 'linkSecondary')
 	h2.headingSecondary Questions
 	ul.list 
-		for question in questions
-			li.list__item
-				span.list__item__title= question.title
-				+link('/admin/questions/'+question.id, 'View')
-				+link('/admin/questions/delete/'+question.id, 'Delete', 'fa-trash', 'linkSecondary')
+		if questions
+			for question in questions
+				li.list__item
+					span.list__item__title= question.title
+					+link('/admin/questions/'+question.id, 'View')
+					+link('/admin/questions/delete/'+question.id, 'Delete', 'fa-trash', 'linkSecondary')
 	a.button.primary(href="/admin/questions/new?quizId="+quiz.id) Add a new question
