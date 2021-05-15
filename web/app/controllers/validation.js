@@ -49,7 +49,7 @@ const checkForErrors = (req, res, next) => {
 
 exports.validate = (method) => {
   switch (method) {
-    case 'createQuizzes': {
+    case 'createQuiz': {
       return [checks.quizName, checks.quizType, checkForErrors];
     }
 
