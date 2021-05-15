@@ -6,5 +6,5 @@ block content
 		for quiz in quizzes 
 			li.list__item
 				span.list__item__title= quiz.name
-				+link('admin/quizzes/'+quiz.id, 'View')
+				+link('/admin/quizzes/'+quiz.id, 'View')
 	a.button.primary(href="/admin/quizzes/new") Create a new quiz
