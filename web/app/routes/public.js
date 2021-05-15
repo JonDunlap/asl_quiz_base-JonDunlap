@@ -7,7 +7,7 @@ const quizzesController = require('../controllers/quizzes');
 // GET / - loads the home page
 router.get('/', quizzesController.renderLanding);
 // GET /quiz/:id - loads the questions and choices for the given quiz
-router.get('/quiz/:id', quizzesController.renderDashboard);
+router.get('/quiz/:id', quizzesController.renderQuestionsList);
 
 // export the router
 module.exports = router;
