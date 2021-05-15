@@ -7,5 +7,3 @@ block content
 			li.list__item
 				span.list__item__title= question.title
 				+link('/questions/'+question.id, 'View')
-				if loggedIn
-					+link('/admin/questions/'+question.id, 'Edit', 'fa-edit', 'linkSecondary')
