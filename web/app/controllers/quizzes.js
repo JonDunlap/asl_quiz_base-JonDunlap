@@ -20,7 +20,6 @@ exports.renderQuizForm = async (req, res) => {
   res.render('quizzes/form', { name: '', type: 'private' });
 };
 
-// four params are required to mark this as an error handling middleware
 // eslint-disable-next-line no-unused-vars
 exports.renderQuizFormWithErrors = (errors, req, res, next) => {
   // get the data the user submitted
@@ -64,7 +63,6 @@ exports.renderEditForm = async (req, res) => {
   res.render('quizzes/form', quiz);
 };
 
-// four params are required to mark this as an error handling middleware
 //  eslint-disable-next-line no-unused-vars
 exports.goBackOnError = (errors, req, res, next) => {
   // passing 'back' to redirect sends the user back to the page they came from
