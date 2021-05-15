@@ -23,7 +23,7 @@ app.use(API);
 
 // set pug as the view engine
 app.set('view engine', 'pug');
-// set the view forlder as the default place to render from
+// set the view folder as the default place to render from
 app.set('views', `${__dirname}/views`);
 
 // setup routers
