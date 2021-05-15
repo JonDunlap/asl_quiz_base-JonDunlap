@@ -1,0 +1,15 @@
+extends _layout
+include _includes/link_mixin
+block content
+	h1.heading Welcome to Back-end Learning!
+	h2.headingSecondary Want to improve your back-end development skills?
+	p Check out the quizzes created by other users below for fun challenges
+	//- h2.headingSecondary Want to test your friend's knowledge?
+	//- a.button.primary(href="/admin/quizzes/new") Create a new quiz
+	h1.heading Public Quizzes
+	ul.list 
+	for quiz in quizzes 
+		li.list__item
+			span.list__item__title= quiz.title
+			+link('quizzes/'+quiz.id, 'View')
+	//- a.button.primary(href="/admin/quizzes/new") Create a new quiz
