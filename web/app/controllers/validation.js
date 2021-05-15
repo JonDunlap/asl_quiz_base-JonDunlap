@@ -4,26 +4,37 @@ const checks = {
   id: check('id')
     .isUUID()
     .withMessage('ID not valid, please go back and try again.'),
-  title: check('title')
+  quizName: check('name')
     .exists()
-    .withMessage('Decision title is required.')
+    .withMessage('Quiz name is required.')
     .isLength(3)
-    .withMessage(
-      'Decision title is required to be at least 3 characters long.'
-    ),
-  type: check('type')
+    .withMessage('Quiz name is required to be at least 3 characters long.'),
+  quizType: check('type')
     .exists()
-    .withMessage('Decision type is required.')
+    .withMessage('Quiz type is required.')
     .isIn(['public', 'private'])
-    .withMessage('Decisions must be public or private.'),
-  value: check('value')
+    .withMessage('Quizzes must be public or private.'),
+  questionTitle: check('title')
     .exists()
-    .withMessage('Option value is required.')
+    .withMessage('Question title is required.')
     .isLength(1)
-    .withMessage('Option value is required to be at least 1 character long'),
-  decisionId: check('decisionId')
+    .withMessage('Question title is required to be at least 1 character long'),
+  quizId: check('quizId')
     .isUUID()
-    .withMessage('Decision ID is not valid, please go back and try again.'),
+    .withMessage('Quiz ID is not valid, please go back and try again.'),
+  choiceValue: check('value')
+    .exists()
+    .withMessage('Choice value is required.')
+    .isLength(3)
+    .withMessage('Choice value is required to be at least 3 characters long.'),
+  choiceType: check('type')
+    .exists()
+    .withMessage('Choice type is required.')
+    .isIn(['correct', 'incorrect'])
+    .withMessage('Choices must be correct or incorrect.'),
+  questionId: check('questionId')
+    .isUUID()
+    .withMessage('Question ID is not valid, please go back and try again.'),
 };
 
 const checkForErrors = (req, res, next) => {
@@ -38,27 +49,50 @@ const checkForErrors = (req, res, next) => {
 
 exports.validate = (method) => {
   switch (method) {
-    case 'createDecisions': {
-      return [checks.title, checks.type, checkForErrors];
+    case 'createQuizzes': {
+      return [checks.quizName, checks.quizType, checkForErrors];
     }
 
-    case 'editDecision': {
-      return [checks.id, checks.title, checks.type, checkForErrors];
+    case 'editQuiz': {
+      return [checks.id, checks.quizName, checks.quizType, checkForErrors];
     }
 
-    case 'deleteDecision': {
+    case 'deleteQuiz': {
       return [checks.id, checkForErrors];
     }
 
-    case 'createOption': {
-      return [checks.value, checks.decisionId, checkForErrors];
+    case 'createQuestion': {
+      return [checks.questionTitle, checks.quizId, checkForErrors];
     }
 
-    case 'editOption': {
-      return [checks.id, checks.value, checks.decisionId, checkForErrors];
+    case 'editQuestion': {
+      return [checks.id, checks.questionTitle, checks.quizId, checkForErrors];
     }
 
-    case 'deleteOption': {
+    case 'deleteQuestion': {
+      return [checks.id, checkForErrors];
+    }
+
+    case 'createChoice': {
+      return [
+        checks.choiceValue,
+        checks.choiceType,
+        checks.questionId,
+        checkForErrors,
+      ];
+    }
+
+    case 'editChoice': {
+      return [
+        checks.id,
+        checks.choiceValue,
+        checks.choiceType,
+        checks.questionId,
+        checkForErrors,
+      ];
+    }
+
+    case 'deleteChoice': {
       return [checks.id, checkForErrors];
     }
 
