@@ -61,14 +61,10 @@ exports.getQuiz = (req, res) => {
 // create a new quiz
 exports.createQuiz = (req, res) => {
   // get the name, type, and userId from the request body
-  // TODO - add once auth is supported
-  // const { name, type, userId } = req.body;
-  const { name, type } = req.body;
+  const { name, type, userId } = req.body;
 
   // create the quiz and save the id returned from the model
-  // TODO - add once auth is supported
-  // const id = Quizzes.createNewItem({ name, type, userId });
-  const id = Quizzes.createNewItem({ name, type });
+  const id = Quizzes.createNewItem({ name, type, userId });
 
   // send the new id back in json
   res.json(id);
