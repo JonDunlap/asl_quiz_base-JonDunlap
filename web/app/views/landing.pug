@@ -10,6 +10,6 @@ block content
 	ul.list 
 	for quiz in quizzes 
 		li.list__item
-			span.list__item__title= quiz.title
-			+link('quizzes/'+quiz.id, 'View')
+			span.list__item__title= quiz.name
+			+link('quiz/'+quiz.id, 'View')
 	//- a.button.primary(href="/admin/quizzes/new") Create a new quiz
