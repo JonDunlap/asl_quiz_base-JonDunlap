@@ -7,11 +7,11 @@ block content
 		label.form__label
 			span.form__labelInline Quiz Type
 			label.form__labelInline
-				input.form__input__radio(type="radio", name="type", value="public", checked=type === 'public')
-				span Public
-			label.form__labelInline
 				input.form__input__radio(type="radio", name="type", value="private", checked=type === 'private')
 				span Private
+			label.form__labelInline
+				input.form__input__radio(type="radio", name="type", value="public", checked=type === 'public')
+				span Public
 		button.button.active(type="submit")= id ? 'Edit Quiz' : 'Create Quiz'
 		if errors
 			for error in errors
