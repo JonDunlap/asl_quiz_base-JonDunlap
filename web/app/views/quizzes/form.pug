@@ -1,0 +1,18 @@
+extends ../_layout
+block content
+	h1.heading= id ? 'Edit Quiz' : 'Create a New Quiz'
+	form.form(method="POST")
+		label.form__label name ? name : 'Quiz Name'
+			input.form__input(type="text", name="title", value=name)
+		label.form__label
+			span.form__labelInline Quiz Type
+			label.form__labelInline
+				input.form__input__radio(type="radio", name="type", value="public", checked=type === 'public')
+				span yes
+			label.form__labelInline
+				input.form__input__radio(type="radio", name="type", value="private", checked=type === 'private')
+				span no
+		button.button(type="submit") Create Quiz
+		if errors
+			for error in errors
+				small.flash=error.msg
