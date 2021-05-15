@@ -21,12 +21,12 @@ router.post('/edit/:id', [
   quizzesController.renderQuizFormWithErrors,
   quizzesController.saveQuiz,
 ]);
-// // GET /admin/quizzes/delete/:id - deletes a quiz
-// router.get('/delete/:id', [
-//   validationCtrl.validate('deleteQuiz'),
-//   quizzesController.goBackOnError,
-//   quizzesController.deleteQuiz,
-// ]);
+// GET /admin/quizzes/delete/:id - deletes a quiz
+router.get('/delete/:id', [
+  validationCtrl.validate('deleteQuiz'),
+  quizzesController.goBackOnError,
+  quizzesController.deleteQuiz,
+]);
 // GET /admin/quizzes/list - loads all the user's quizzes
 router.get('/list', quizzesController.renderDashboard);
 // GET /admin/quizzes/:id - loads the details page
