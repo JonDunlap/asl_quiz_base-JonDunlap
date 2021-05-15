@@ -49,7 +49,8 @@ exports.saveQuiz = async (req, res) => {
   }
 
   // redirect to the edit quiz detail page
-  res.redirect(`/admin/quizzes/${data.id}`);
+  // either use the id from the request params or the returned id from the API
+  res.redirect(id ? `/admin/quizzes/${data.id}` : `/admin/quizzes/${data}`);
 };
 
 exports.renderEditForm = async (req, res) => {
@@ -61,6 +62,23 @@ exports.renderEditForm = async (req, res) => {
 
   // render the edit form
   res.render('quizzes/form', quiz);
+};
+
+// four params are required to mark this as an error handling middleware
+//  eslint-disable-next-line no-unused-vars
+exports.goBackOnError = (errors, req, res, next) => {
+  // passing 'back' to redirect sends the user back to the page they came from
+  res.redirect('back');
+};
+
+exports.deleteQuiz = async (req, res) => {
+  const { id } = req.params;
+
+  // send the delete request to the API
+  await req.API.delete(`/quizzes/${id}`);
+
+  // redirect to the dashboard
+  res.redirect('/admin/quizzes/list');
 };
 
 exports.renderDashboard = async (req, res) => {
