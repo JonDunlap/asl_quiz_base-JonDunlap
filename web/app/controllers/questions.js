@@ -25,7 +25,7 @@ exports.saveQuestion = async (req, res) => {
   // if there is an id, we are editing, if there isn't we are adding
   if (id) {
     // make a put request with the updated information
-    data = await req.API.put(`/questions/${id}`, { title, quizId });
+    data = await req.API.put(`/questions/${id}`, { title });
   } else {
     // send the new question to the API
     data = await req.API.post('/questions', { title, quizId });
