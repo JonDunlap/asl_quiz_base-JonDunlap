@@ -1,7 +1,7 @@
 extends ../_layout
 include ../_includes/link_mixin
 block content
-	h1.heading= question.name
+	h1.heading= question.title
 		+link('/admin/questions/edit/'+question.id, 'Edit', 'fa-edit')
 		+link('/admin/questions/delete/'+question.id, 'Delete', 'fa-trash', 'linkSecondary')
 	h2.headingSecondary Choices
@@ -9,7 +9,7 @@ block content
 		if choices
 			for choice in choices
 				li.list__item
-					span.list__item__title= choice.title
+					span.list__item__title= choice.value
 					+link('/admin/choices/edit/'+choice.id, 'Edit', 'fa-edit')
 					+link('/admin/choices/delete/'+choice.id, 'Delete', 'fa-trash', 'linkSecondary')
 	a.button.primary(href="/admin/choices/new?questionId="+question.id) Add a new choice
