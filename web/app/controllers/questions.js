@@ -31,7 +31,7 @@ exports.saveQuestion = async (req, res) => {
     data = await req.API.post('/questions', { title, quizId });
   }
 
-  // redirect to the edit question detail page
+  // redirect to the question detail page
   // either use the id from the request params or the returned id from the API
   res.redirect(id ? `/admin/questions/${data.id}` : `/admin/questions/${data}`);
 };
