@@ -83,13 +83,7 @@ exports.validate = (method) => {
     }
 
     case 'editChoice': {
-      return [
-        checks.id,
-        checks.choiceValue,
-        checks.choiceType,
-        checks.questionId,
-        checkForErrors,
-      ];
+      return [checks.id, checks.choiceValue, checks.choiceType, checkForErrors];
     }
 
     case 'deleteChoice': {
