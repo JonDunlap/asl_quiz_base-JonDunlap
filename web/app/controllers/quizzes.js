@@ -26,6 +26,38 @@ exports.renderQuestionsList = async (req, res) => {
   res.render('quizzes/list', { quiz, questions, choicesArray });
 };
 
+// eslint-disable-next-line no-unused-vars
+exports.renderQuestionsListWithErrors = (errors, req, res, next) => {
+  // passing 'back' to redirect sends the user back to the page they came from
+
+  // ! DEBUG - check to see which route is working
+  console.log('there was an error');
+
+  res.redirect('back');
+};
+
+exports.renderQuestionsListWithSuccess = async (req, res) => {
+  // get the quiz id from the request
+  const { id } = req.params;
+  // get the choiceId the user submitted
+  const { choiceId } = req.body;
+
+  // get the detail of this quiz
+  const quiz = await req.API.get(`/quizzes/${id}`);
+  // get the choice the user submitted
+  const choice = await req.API.get(`/choices/${choiceId}`);
+
+  let message = {};
+
+  if (choice.type === 'correct') message = { success: 'Correct' };
+  message = { errors: 'Incorrect' };
+
+  // ! DEBUG - check to see which route is working
+  console.log(`it was a success ${  message}`);
+  //
+  res.render('quizzes/list', { quiz, choiceId, message });
+};
+
 exports.renderQuizForm = async (req, res) => {
   res.render('quizzes/form', { name: '', type: 'private' });
 };
