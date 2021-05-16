@@ -47,7 +47,7 @@ exports.createQuestion = (req, res) => {
   const id = Questions.createNewItem({ title, quizId });
 
   // send the new id back in json
-  res.json(id);
+  res.json({ id, title, quizId });
 };
 
 // update an existing question

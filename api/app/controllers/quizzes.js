@@ -67,7 +67,7 @@ exports.createQuiz = (req, res) => {
   const id = Quizzes.createNewItem({ name, type, userId });
 
   // send the new id back in json
-  res.json(id);
+  res.json({ id, name, type, userId });
 };
 
 // update an existing quiz

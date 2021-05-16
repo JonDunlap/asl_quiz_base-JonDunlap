@@ -47,7 +47,7 @@ exports.createChoice = (req, res) => {
   const id = Choices.createNewItem({ value, type, questionId });
 
   // send the new id back in json
-  res.json(id);
+  res.json({ id, value, type, questionId });
 };
 
 // update an existing choice
