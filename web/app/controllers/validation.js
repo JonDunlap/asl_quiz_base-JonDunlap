@@ -35,6 +35,9 @@ const checks = {
   questionId: check('questionId')
     .isUUID()
     .withMessage('Question ID is not valid, please go back and try again.'),
+  choiceSelected: check('choiceId')
+    .exists()
+    .withMessage('You must select a choice.'),
 };
 
 const checkForErrors = (req, res, next) => {
@@ -88,6 +91,10 @@ exports.validate = (method) => {
 
     case 'deleteChoice': {
       return [checks.id, checkForErrors];
+    }
+
+    case 'submitChoice': {
+      return [checks.id, checks.choiceSelected, checkForErrors];
     }
 
     default: {
