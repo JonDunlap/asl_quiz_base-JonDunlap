@@ -7,7 +7,7 @@ const API = require('./utils/API');
 
 // load routes
 const publicRoutes = require('./routes/public');
-// const adminChoicesRoutes = require('./routes/adminChoices');
+const adminChoicesRoutes = require('./routes/adminChoices');
 const adminQuestionsRoutes = require('./routes/adminQuestions');
 const adminQuizzesRoutes = require('./routes/adminQuizzes');
 
@@ -28,7 +28,7 @@ app.set('views', `${__dirname}/views`);
 
 // setup routers
 app.use('/', publicRoutes);
-// app.use('/admin/choices', adminChoicesRoutes);
+app.use('/admin/choices', adminChoicesRoutes);
 app.use('/admin/questions', adminQuestionsRoutes);
 app.use('/admin/quizzes', adminQuizzesRoutes);
 
