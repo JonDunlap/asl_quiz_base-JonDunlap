@@ -47,9 +47,8 @@ exports.saveQuiz = async (req, res) => {
     data = await req.API.post('/quizzes', { name, type });
   }
 
-  // redirect to the edit quiz detail page
-  // either use the id from the request params or the returned id from the API
-  res.redirect(id ? `/admin/quizzes/${data.id}` : `/admin/quizzes/${data}`);
+  // redirect to the quiz detail page
+  res.redirect(`/admin/quizzes/${data.id}`);
 };
 
 exports.renderEditForm = async (req, res) => {

@@ -32,8 +32,7 @@ exports.saveQuestion = async (req, res) => {
   }
 
   // redirect to the question detail page
-  // either use the id from the request params or the returned id from the API
-  res.redirect(id ? `/admin/questions/${data.id}` : `/admin/questions/${data}`);
+  res.redirect(`/admin/questions/${data.id}`);
 };
 
 exports.renderEditForm = async (req, res) => {
