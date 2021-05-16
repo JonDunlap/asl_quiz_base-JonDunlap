@@ -6,11 +6,9 @@ exports.renderQuestionForm = async (req, res) => {
 exports.renderQuestionFormWithErrors = (errors, req, res, next) => {
   // get the data the user submitted
   const { title } = req.body;
-  // get the quizId
-  const { quizId } = req.query;
 
   // send the title, quizId, and errors as variables to the view
-  res.render('questions/form', { title, quizId, errors });
+  res.render('questions/form', { title, errors });
 };
 
 exports.saveQuestion = async (req, res) => {
