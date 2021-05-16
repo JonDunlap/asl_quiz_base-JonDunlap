@@ -62,7 +62,7 @@ exports.deleteQuestion = async (req, res) => {
   await req.API.delete(`/questions/${id}`);
 
   // redirect to the dashboard
-  res.redirect('/admin/questions/list');
+  res.redirect('/admin/quizzes/list');
 };
 
 exports.renderAdminDetail = async (req, res) => {
