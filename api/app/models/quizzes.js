@@ -7,7 +7,7 @@ module.exports = [
   },
   {
     id: '44f22531-de40-4d21-ae16-40d758b22c40',
-    name: 'JavaScrip fundamentals',
+    name: 'JavaScript fundamentals',
     type: 'public',
     userId: '9c997ea3-e6c3-465c-982d-2744fc79464c',
   },
