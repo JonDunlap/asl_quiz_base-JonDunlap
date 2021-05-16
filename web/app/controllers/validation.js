@@ -66,7 +66,7 @@ exports.validate = (method) => {
     }
 
     case 'editQuestion': {
-      return [checks.id, checks.questionTitle, checks.quizId, checkForErrors];
+      return [checks.id, checks.questionTitle, checkForErrors];
     }
 
     case 'deleteQuestion': {
