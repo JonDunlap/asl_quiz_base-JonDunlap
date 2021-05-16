@@ -19,17 +19,20 @@ exports.saveChoice = async (req, res) => {
   // pull the id from the request params
   const { id } = req.params;
 
+  // variable to hold the data from our api request
+  let data = {};
+
   // if there is an id, we are editing, if there isn't we are adding
   if (id) {
     // make a put request with the updated information
-    await req.API.put(`/choices/${id}`, { value, type, questionId });
+    data = await req.API.put(`/choices/${id}`, { value, type });
   } else {
     // send the new question to the API
-    await req.API.post('/choices', { value, type, questionId });
+    data = await req.API.post('/choices', { value, type, questionId });
   }
 
   // redirect to the question detail page
-  res.redirect(`/admin/questions/${questionId}`);
+  res.redirect(`/admin/questions/${data.questionId}`);
 };
 
 exports.renderEditForm = async (req, res) => {
