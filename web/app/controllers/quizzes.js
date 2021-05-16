@@ -12,8 +12,18 @@ exports.renderQuestionsList = async (req, res) => {
   const quiz = await req.API.get(`/quizzes/${id}`);
   // get the questions for this quiz
   const questions = await req.API.get(`/questions?quizId=${id}`);
+  // get the choices for each question
+  const getChoices = async () => {
+    const choicesArray = questions.map(async (question) => {
+      const response = await req.API.get(`/choices?questionId=${question.id}`);
+      return response;
+    });
+    return Promise.all(choicesArray);
+  };
 
-  res.render('quizzes/list', { quiz, questions });
+  const choicesArray = await getChoices();
+
+  res.render('quizzes/list', { quiz, questions, choicesArray });
 };
 
 exports.renderQuizForm = async (req, res) => {
