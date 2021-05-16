@@ -2,8 +2,26 @@ extends ../_layout
 include ../_includes/link_mixin
 block content
 	h1.heading= quiz.name
-	ul.list
+	h2.headingSecondary Questions
+	if questions
 		for question in questions
-			li.list__item
-				span.list__item__title= question.title
-				+link('/questions/'+question.id, 'View')
+			form.form(method="POST")
+				label.form__label= question.title
+				if choicesArray
+					label.form__label
+						span.form__labelInline Select your answer:
+						for choices in choicesArray
+							for choice in choices
+								if choice.questionId == question.id
+										label.form__labelInline
+											input.form__input__radio(type="radio", name="choice", choiceId=choice.id, checked=choiceId === choice.id)
+											span= choice.value
+				button.button.active(type="submit") Submit answer
+				if errors
+					for error in errors
+						small.flash=error.msg
+				if message
+					if message.errors
+						small.flash=message.errors
+					if message.success
+						small.flash.success=message.success
