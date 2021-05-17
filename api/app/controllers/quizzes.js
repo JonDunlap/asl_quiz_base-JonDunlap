@@ -71,15 +71,22 @@ exports.createQuiz = (req, res) => {
 };
 
 // update an existing quiz
-exports.updateQuiz = (req, res) => {
+exports.updateQuiz = async (req, res) => {
   // get the id from the request parameters
   const { id } = req.params;
 
-  // update the quiz
-  const updatedQuiz = Quizzes.updateItem(req.body, id);
-
-  // send the updated quiz back in json
-  res.json(updatedQuiz);
+  try {
+    // update the quiz
+    const [, [updatedQuiz]] = await Quizzes.updateItem(req.body, {
+      where: { id },
+      returning: true,
+    });
+    // send the updated quiz back in json
+    res.json(updatedQuiz);
+  } catch (e) {
+    const errors = e.errors.map((err) => err.message);
+    res.status(400).json({ errors });
+  }
 };
 
 // delete a quiz
