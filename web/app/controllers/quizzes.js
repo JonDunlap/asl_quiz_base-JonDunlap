@@ -29,10 +29,6 @@ exports.renderQuestionsList = async (req, res) => {
 // eslint-disable-next-line no-unused-vars
 exports.renderQuestionsListWithErrors = (errors, req, res, next) => {
   // passing 'back' to redirect sends the user back to the page they came from
-
-  // ! DEBUG - check to see which route is working
-  console.log('there was an error');
-
   res.redirect('back');
 };
 
@@ -52,8 +48,6 @@ exports.renderQuestionsListWithSuccess = async (req, res) => {
   if (choice.type === 'correct') message = { success: 'Correct' };
   message = { errors: 'Incorrect' };
 
-  // ! DEBUG - check to see which route is working
-  console.log(`it was a success ${  message}`);
   //
   res.render('quizzes/list', { quiz, choiceId, message });
 };
