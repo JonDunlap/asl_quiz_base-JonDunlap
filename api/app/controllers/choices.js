@@ -45,8 +45,9 @@ exports.createChoice = async (req, res) => {
 
     // send the new choice back in json
     res.json(newChoice);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
+  } catch (e) {
+    const errors = e.errors.map((err) => err.message);
+    res.status(400).json({ errors });
   }
 };
 
@@ -66,8 +67,9 @@ exports.updateChoice = async (req, res) => {
 
     // send the updated choice back in json
     res.json(updatedChoice);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
+  } catch (e) {
+    const errors = e.errors.map((err) => err.message);
+    res.status(400).json({ errors });
   }
 };
 

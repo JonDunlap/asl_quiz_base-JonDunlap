@@ -45,8 +45,9 @@ exports.createQuestion = async (req, res) => {
 
     // send the new id back in json
     res.json(newQuiz);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
+  } catch (e) {
+    const errors = e.errors.map((err) => err.message);
+    res.status(400).json({ errors });
   }
 };
 
@@ -66,8 +67,9 @@ exports.updateQuestion = async (req, res) => {
 
     // send the updated question back in json
     res.json(updatedQuestion);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
+  } catch (e) {
+    const errors = e.errors.map((err) => err.message);
+    res.status(400).json({ errors });
   }
 };
 

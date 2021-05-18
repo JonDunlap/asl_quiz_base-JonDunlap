@@ -60,8 +60,9 @@ exports.createQuiz = async (req, res) => {
 
     // send the new quiz back in json
     res.json(newQuiz);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
+  } catch (e) {
+    const errors = e.errors.map((err) => err.message);
+    res.status(400).json({ errors });
   }
 };
 
