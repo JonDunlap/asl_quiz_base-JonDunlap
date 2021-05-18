@@ -12,6 +12,15 @@ module.exports = {
         type: Sequelize.STRING,
       },
 
+      quizId: {
+        type: Sequelize.UUID,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Quizzes',
+          key: 'id',
+        },
+      },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

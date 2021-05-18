@@ -16,6 +16,15 @@ module.exports = {
         type: Sequelize.ENUM('correct', 'incorrect'),
       },
 
+      questionId: {
+        type: Sequelize.UUID,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Questions',
+          key: 'id',
+        },
+      },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
