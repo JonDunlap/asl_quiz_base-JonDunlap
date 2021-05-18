@@ -6,11 +6,33 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
         type: DataTypes.UUID,
+        validate: {
+          isUUID: {
+            args: 4,
+            msg: 'ID is not valid, please go back and try again.',
+          },
+        },
       },
 
-      name: DataTypes.STRING,
+      name: {
+        type: DataTypes.STRING,
+        validate: {
+          len: {
+            args: [3, 500],
+            msg: 'Name must be at least 3 characters long.',
+          },
+        },
+      },
 
-      type: DataTypes.ENUM('public', 'private'),
+      type: {
+        type: DataTypes.ENUM('public', 'private'),
+        validate: {
+          isIn: {
+            args: [['public', 'private']],
+            msg: 'Type must be public or private.',
+          },
+        },
+      },
     },
     {}
   );
