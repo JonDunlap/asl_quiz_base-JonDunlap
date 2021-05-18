@@ -15,9 +15,10 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
 
-  // Choices.associate = (models) => {
-  //   // define association here
-  // };
+  Choices.associate = (models) => {
+    // define association here
+    Choices.belongsTo(models.Questions, { foreignKey: 'questionId' });
+  };
 
   return Choices;
 };
