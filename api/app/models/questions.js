@@ -6,9 +6,23 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
         type: DataTypes.UUID,
+        validate: {
+          isUUID: {
+            args: 4,
+            msg: 'ID is not valid, please go back and try again.',
+          },
+        },
       },
 
-      title: DataTypes.STRING,
+      title: {
+        type: DataTypes.STRING,
+        validate: {
+          len: {
+            args: [3, 500],
+            msg: 'Title must be at least 3 characters long.',
+          },
+        },
+      },
     },
     {}
   );
