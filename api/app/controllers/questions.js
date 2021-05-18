@@ -8,7 +8,7 @@ exports.getQuestionsByQuizId = async (req, res) => {
 
   // run the get all function from the model
   // filter the questions to only the ones from this quiz
-  const quizQuestions = await Questions.getAll({ where: { quizId } });
+  const quizQuestions = await Questions.findAll({ where: { quizId } });
 
   // respond with json of the questions from this quiz
   res.json(quizQuestions);
@@ -20,7 +20,7 @@ exports.getQuestion = async (req, res) => {
   const { id } = req.params;
 
   // search our model for the question
-  const question = await Questions.getOneById(id);
+  const question = await Questions.findByPk(id);
 
   // if no question is found
   if (!question) {
@@ -41,7 +41,7 @@ exports.createQuestion = async (req, res) => {
 
   try {
     // create the question
-    const newQuiz = await Questions.createNewItem({ title, quizId });
+    const newQuiz = await Questions.create({ title, quizId });
 
     // send the new id back in json
     res.json(newQuiz);
@@ -57,7 +57,7 @@ exports.updateQuestion = async (req, res) => {
 
   try {
     // update the question
-    const [, [updatedQuestion]] = await Questions.updateItem(req.body, {
+    const [, [updatedQuestion]] = await Questions.update(req.body, {
       // only update the row using the id in the url
       where: { id },
       // return the updated row
@@ -77,7 +77,7 @@ exports.deleteQuestion = async (req, res) => {
   const { id } = req.params;
 
   // delete the question
-  await Questions.deleteItem(id);
+  await Questions.destroy({ where: { id } });
 
   // send a good status code
   res.sendStatus(204);

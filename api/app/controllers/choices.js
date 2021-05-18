@@ -8,7 +8,7 @@ exports.getChoicesByQuestionId = async (req, res) => {
 
   // run the get all function from the model
   // filter the choices to only the ones from the question
-  const questionChoices = await Choices.getAll({ where: { questionId } });
+  const questionChoices = await Choices.findAll({ where: { questionId } });
 
   // respond with json of the choices from this question
   res.json(questionChoices);
@@ -20,7 +20,7 @@ exports.getChoice = async (req, res) => {
   const { id } = req.params;
 
   // search our model for the choice
-  const choice = await Choices.getOneById(id);
+  const choice = await Choices.findByPk(id);
 
   // if no choice is found
   if (!choice) {
@@ -41,7 +41,7 @@ exports.createChoice = async (req, res) => {
 
   try {
     // create the choice
-    const newChoice = await Choices.createNewItem({ value, type, questionId });
+    const newChoice = await Choices.create({ value, type, questionId });
 
     // send the new choice back in json
     res.json(newChoice);
@@ -57,7 +57,7 @@ exports.updateChoice = async (req, res) => {
 
   try {
     // update the choice
-    const [, [updatedChoice]] = await Choices.updateItem(req.body, {
+    const [, [updatedChoice]] = await Choices.update(req.body, {
       // only update the row using the id in the url
       where: { id },
       // return the updated row
@@ -77,7 +77,7 @@ exports.deleteChoice = async (req, res) => {
   const { id } = req.params;
 
   // delete the choice
-  await Choices.deleteItem(id);
+  await Choices.destroy({ where: { id } });
 
   // send a good status code
   res.sendStatus(204);

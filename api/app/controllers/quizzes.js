@@ -7,10 +7,10 @@ exports.getAllQuizzes = async (req, res) => {
   // const { userId } = req.body;
 
   // run the get all function from the model
-  const quizzes = await Quizzes.getAll();
+  const quizzes = await Quizzes.findAll();
 
   // TODO - filter the quizzes to only the ones from this user
-  // const quizzes = await Quizzes.getAll({ where: { userId } });
+  // const quizzes = await Quizzes.findAll({ where: { userId } });
 
   // respond with json of the quizzes for this user
   res.json(quizzes);
@@ -23,7 +23,7 @@ exports.getPublicQuizzes = async (req, res) => {
 
   // run the get all function from the model
   // filter the quizzes to only include the ones with a type of 'public'
-  const publicQuizzes = await Quizzes.getAll({ where: { type: 'public' } });
+  const publicQuizzes = await Quizzes.findAll({ where: { type: 'public' } });
 
   // respond with json of the public quizzes
   res.json(publicQuizzes);
@@ -35,7 +35,7 @@ exports.getQuiz = async (req, res) => {
   const { id } = req.params;
 
   // search our model for the quiz
-  const quiz = await Quizzes.getOneById(id);
+  const quiz = await Quizzes.findByPk(id);
 
   // if no quiz is found
   if (!quiz) {
@@ -56,7 +56,7 @@ exports.createQuiz = async (req, res) => {
 
   try {
     // create the quiz
-    const newQuiz = await Quizzes.createNewItem({ name, type, userId });
+    const newQuiz = await Quizzes.create({ name, type, userId });
 
     // send the new quiz back in json
     res.json(newQuiz);
@@ -72,7 +72,7 @@ exports.updateQuiz = async (req, res) => {
 
   try {
     // update the quiz
-    const [, [updatedQuiz]] = await Quizzes.updateItem(req.body, {
+    const [, [updatedQuiz]] = await Quizzes.update(req.body, {
       where: { id },
       returning: true,
     });
@@ -90,7 +90,7 @@ exports.deleteQuiz = async (req, res) => {
   const { id } = req.params;
 
   // delete the quiz
-  await Quizzes.deleteItem(id);
+  await Quizzes.destroy({ where: { id } });
 
   // send a good status code
   res.sendStatus(204);
