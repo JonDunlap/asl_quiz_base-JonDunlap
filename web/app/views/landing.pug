@@ -8,8 +8,9 @@ block content
 	//- a.button.primary(href="/admin/quizzes/new") Create a new quiz
 	h1.heading Public Quizzes
 	ul.list 
-		for quiz in quizzes 
-			li.list__item
-				span.list__item__title= quiz.name
-				+link('quiz/'+quiz.id, 'View')
+		if quizzes
+			for quiz in quizzes 
+				li.list__item
+					span.list__item__title= quiz.name
+					+link('quiz/'+quiz.id, 'View')
 	//- a.button.primary(href="/admin/quizzes/new") Create a new quiz
