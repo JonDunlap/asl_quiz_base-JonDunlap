@@ -10,7 +10,7 @@ exports.getAllQuizzes = async (req, res) => {
   const quizzes = await Quizzes.getAll();
 
   // TODO - filter the quizzes to only the ones from this user
-  // const quizzes = await Quizzes.getAll({ where: { userId: userId } });
+  // const quizzes = await Quizzes.getAll({ where: { userId } });
 
   // respond with json of the quizzes for this user
   res.json(quizzes);
@@ -59,7 +59,7 @@ exports.createQuiz = async (req, res) => {
     const newQuiz = await Quizzes.createNewItem({ name, type, userId });
 
     // send the new quiz back in json
-    res.json({ newQuiz });
+    res.json(newQuiz);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
