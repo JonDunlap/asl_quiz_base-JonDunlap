@@ -8,6 +8,8 @@ const expressSession = require('express-session');
 const FileStore = require('session-file-store')(expressSession);
 // load in the axios middleware
 const API = require('./utils/API');
+// load in the protectedRoute middleware
+const protectedRoute = require('./utils/protectedRoute');
 
 // load routes
 const publicRoutes = require('./routes/public');
@@ -46,9 +48,9 @@ app.set('views', `${__dirname}/views`);
 
 // setup routers
 app.use('/', publicRoutes);
-app.use('/admin/choices', adminChoicesRoutes);
-app.use('/admin/questions', adminQuestionsRoutes);
-app.use('/admin/quizzes', adminQuizzesRoutes);
+app.use('/admin/choices', protectedRoute, adminChoicesRoutes);
+app.use('/admin/questions', protectedRoute, adminQuestionsRoutes);
+app.use('/admin/quizzes', protectedRoute, adminQuizzesRoutes);
 
 // four params are required to mark this as an error handling middleware
 // the comment below this allows for eslint to not throw an error
