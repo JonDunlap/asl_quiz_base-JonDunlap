@@ -1,5 +1,7 @@
 {
   "env": {
-    "DEBUG": "web:*"
+    "DEBUG": "web:*",
+    "CLIENT_ID": "c932d4d8598834ace586",
+    "CALLBACK_URL": "http://localhost:3000/github/callback"
   }
 }
