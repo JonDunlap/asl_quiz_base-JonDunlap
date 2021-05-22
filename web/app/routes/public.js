@@ -18,6 +18,10 @@ router.post('/quiz/:id', [
 ]);
 // GET /login - load the login page
 router.get('/login', authCtrl.renderLogin);
+// GET /login/github - send the user to github for authorization
+router.get('/login/github', authCtrl.redirectToGithub);
+// GET /github/callback - the route that is hit when coming back from github
+router.get('/github/callback', authCtrl.verifyGithubCode);
 
 // export the router
 module.exports = router;
