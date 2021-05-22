@@ -1,5 +1,7 @@
 const axios = require('axios');
 const error = require('debug')('api:error');
+const jwt = require('jsonwebtoken');
+const { Users } = require('../models');
 
 exports.exchangeCode = async (req, res) => {
   // pull the code out of the body
@@ -18,7 +20,18 @@ exports.exchangeCode = async (req, res) => {
         },
       }
     );
-    console.log(data);
+
+    const [user] = await Users.upsert(
+      {
+        username: data.user.email,
+        access_token: data.access_token,
+        type: 'github',
+      },
+      { returning: true }
+    );
+
+    const token = jwt.sign({ id: user.id }, process.env.SECRET);
+    res.json({ token, loggedIn: true });
   } catch (err) {
     // log the error
     error(err);
