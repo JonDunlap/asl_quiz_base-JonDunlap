@@ -34,3 +34,10 @@ exports.verifyGithubCode = async (req, res) => {
   // go to the admin dashboard
   res.redirect('/admin/quizzes/list');
 };
+
+exports.logout = (req, res) => {
+  // destroy the user's session data (token and loggedIn)
+  req.session.destroy();
+  // send them to the home page
+  res.redirect('/');
+};
