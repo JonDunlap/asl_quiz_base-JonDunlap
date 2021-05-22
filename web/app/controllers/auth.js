@@ -24,7 +24,7 @@ exports.verifyGithubCode = async (req, res) => {
   // pull hte code sent from github out of the url
   const { code } = req.query;
   // make an api request to verify the code
-  const { token, loggedIn } = await req.API.post('/auth/github', {
+  const { token, loggedIn } = await req.API.post('/auth/exchange', {
     code,
     url: process.env.CALLBACK_URL,
   });

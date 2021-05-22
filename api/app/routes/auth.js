@@ -4,8 +4,8 @@ const router = require('express').Router();
 // import the auth controller
 const authCtrl = require('../controllers/auth');
 
-// POST /auth/slack - receives a code and will exchange it for an access token
-router.post('/github', authCtrl.exchangeCode);
+// POST /auth/exchange - receives a code and will exchange it for an access token
+router.post('/exchange', authCtrl.exchangeCode);
 
 // export the route from this file
 module.exports = router;
