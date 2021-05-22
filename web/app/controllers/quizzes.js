@@ -115,13 +115,9 @@ exports.deleteQuiz = async (req, res) => {
 };
 
 exports.renderDashboard = async (req, res) => {
-  // TODO - add userId of logged in user
   const quizzes = await req.API.get('/quizzes');
 
-  //! DEBUG - used to show buttons for logged in user
-  const loggedIn = true;
-
-  res.render('quizzes/admin-landing', { quizzes, loggedIn });
+  res.render('quizzes/admin-landing', { quizzes });
 };
 
 exports.renderAdminDetail = async (req, res) => {
@@ -132,8 +128,5 @@ exports.renderAdminDetail = async (req, res) => {
   // get the questions for this quiz
   const questions = await req.API.get(`/questions?quizId=${id}`);
 
-  //! DEBUG - used to show buttons for logged in user
-  const loggedIn = true;
-
-  res.render('quizzes/detail', { quiz, questions, loggedIn });
+  res.render('quizzes/detail', { quiz, questions });
 };
