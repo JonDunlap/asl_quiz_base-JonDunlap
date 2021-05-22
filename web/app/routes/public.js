@@ -4,6 +4,7 @@ const router = require('express').Router();
 // load the controller
 const quizzesController = require('../controllers/quizzes');
 const validationCtrl = require('../controllers/validation');
+const authCtrl = require('../controllers/auth');
 
 // GET / - loads the home page
 router.get('/', quizzesController.renderLanding);
@@ -15,6 +16,8 @@ router.post('/quiz/:id', [
   quizzesController.renderQuestionsListWithErrors,
   quizzesController.renderQuestionsListWithSuccess,
 ]);
+// GET /login - load the login page
+router.get('/login', authCtrl.renderLogin);
 
 // export the router
 module.exports = router;
