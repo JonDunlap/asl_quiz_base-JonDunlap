@@ -3,14 +3,9 @@ const { Quizzes } = require('../models');
 
 // get all the quizzes for a given user
 exports.getAllQuizzes = async (req, res) => {
-  // TODO - get the userId from the request body
-  // const { userId } = req.body;
-
   // run the get all function from the model
-  const quizzes = await Quizzes.findAll();
-
-  // TODO - filter the quizzes to only the ones from this user
-  // const quizzes = await Quizzes.findAll({ where: { userId } });
+  // filter the quizzes to only the ones from this user
+  const quizzes = await Quizzes.findAll({ where: { userId: req.userId } });
 
   // respond with json of the quizzes for this user
   res.json(quizzes);
@@ -51,12 +46,12 @@ exports.getQuiz = async (req, res) => {
 
 // create a new quiz
 exports.createQuiz = async (req, res) => {
-  // get the name, type, and userId from the request body
-  const { name, type, userId } = req.body;
+  // get the name, type from the request body
+  const { name, type } = req.body;
 
   try {
     // create the quiz
-    const newQuiz = await Quizzes.create({ name, type, userId });
+    const newQuiz = await Quizzes.create({ name, type, userId: req.userId });
 
     // send the new quiz back in json
     res.json(newQuiz);
