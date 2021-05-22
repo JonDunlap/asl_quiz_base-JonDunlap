@@ -11,11 +11,8 @@ exports.getAllQuizzes = async (req, res) => {
   res.json(quizzes);
 };
 
-// get all the quizzes with a type of public for a particular user
+// get all the quizzes with a type of public
 exports.getPublicQuizzes = async (req, res) => {
-  // get the user id from the request body
-  // const { userId } = req.body;
-
   // run the get all function from the model
   // filter the quizzes to only include the ones with a type of 'public'
   const publicQuizzes = await Quizzes.findAll({ where: { type: 'public' } });
