@@ -1,5 +1,7 @@
 {
   "env": {
-    "DEBUG": "api:*"
+    "DEBUG": "api:*",
+    "CLIENT_ID": "c932d4d8598834ace586",
+    "CLIENT_SECRET": "a27aa1e8badc2f248380c10b68bf7cf473b0cb65"
   }
 }
