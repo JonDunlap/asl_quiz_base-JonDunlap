@@ -21,7 +21,7 @@ exports.redirectToGithub = (req, res) => {
 };
 
 exports.verifyGithubCode = async (req, res) => {
-  // pull hte code sent from github out of the url
+  // pull the code sent from github out of the url
   const { code } = req.query;
   // make an api request to verify the code
   const { token, loggedIn } = await req.API.post('/auth/exchange', {
