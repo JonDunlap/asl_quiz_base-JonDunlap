@@ -1,6 +1,7 @@
 {
   "env": {
     "DEBUG": "api:*",
+    "SECRET": "1qybrZHGdO17JQUtyX44mu949d9GAVb0GM6ca9fxah65sVz3ykoDuaHxDz2xx6ensz6M3VGu8I1QmFcaRtvbIc9WFUgRBCDT5c5oRGCgXnuqUFsg1tjpoYMLG5NultVOAwPZ3pAetgCjuTXG00T6RcWqXIFmSCF1b4gMg1ewmpKHnfAOu6o9ACNKg7SmzzbJTjNV3PBNb5gx8F48X2tnn89Jf2xjEdo6VjKM0T2kugfnn8YhH31QeZltAD",
     "CLIENT_ID": "c932d4d8598834ace586",
     "CLIENT_SECRET": "a27aa1e8badc2f248380c10b68bf7cf473b0cb65"
   }
