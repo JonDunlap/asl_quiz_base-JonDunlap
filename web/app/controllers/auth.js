@@ -13,7 +13,7 @@ exports.redirectToGithub = (req, res) => {
     client_id: process.env.CLIENT_ID,
     redirect_uri: process.env.CALLBACK_URL,
     // get the basic info about the user and their email
-    scope: 'read:user,user:email',
+    scope: 'user:email',
   });
 
   log(GITHUB_URL + params);
