@@ -24,10 +24,24 @@ exports.verifyGithubCode = async (req, res) => {
   // pull the code sent from github out of the url
   const { code } = req.query;
   // make an api request to verify the code
-  const { token, loggedIn } = await req.API.post('/auth/exchange', {
+  const { data } = await req.API.post('/auth/exchange', {
     code,
     url: process.env.CALLBACK_URL,
   });
+
+  // Redirect to exchange the access token for the user data
+  res.redirect(`/github/token?${data}`);
+};
+
+exports.verifyGithubToken = async (req, res) => {
+  // pull the token sent from github out of the url
+  const { access_token: accessToken } = req.query;
+
+  // make an api request to verify the code
+  const { token, loggedIn } = await req.API.post('/auth/token', {
+    accessToken,
+  });
+
   // save the loggedIn state and token to the session
   req.session.loggedIn = loggedIn;
   req.session.token = token;

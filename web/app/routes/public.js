@@ -22,7 +22,9 @@ router.get('/login', authCtrl.renderLogin);
 router.get('/login/github', authCtrl.redirectToGithub);
 // GET /github/callback - the route that is hit when coming back from github
 router.get('/github/callback', authCtrl.verifyGithubCode);
-// GET /logout - log teh user out of the application
+// GET /github/token - the route that is hit when coming back from github
+router.get('/github/token', authCtrl.verifyGithubToken);
+// GET /logout - log the user out of the application
 router.get('/logout', authCtrl.logout);
 
 // export the router
