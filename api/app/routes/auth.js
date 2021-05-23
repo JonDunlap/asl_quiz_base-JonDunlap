@@ -9,7 +9,7 @@ router.post('/exchange', authCtrl.exchangeCode);
 // POST /auth/token - exchange the access token for user information
 router.post('/token', authCtrl.exchangeAccessToken);
 // GET /auth/login - login the user
-router.get('/login', authCtrl.findUser);
+router.post('/login', authCtrl.findUser);
 // POST /auth/signup - create a new user
 router.post('/signup', authCtrl.createUser);
 
