@@ -8,7 +8,7 @@ exports.exchangeCode = async (req, res) => {
   const { code, url } = req.body;
 
   try {
-    // make a request to slack for the access_token
+    // make a request to github for the access_token
     const { data } = await axios.get(
       'https://github.com/login/oauth/access_token',
       {
@@ -21,16 +21,7 @@ exports.exchangeCode = async (req, res) => {
       }
     );
 
-    // const [user] = await Users.upsert(
-    //   {
-    //     username: data.user.email,
-    //     access_token: data.access_token,
-    //     type: 'github',
-    //   },
-    //   { returning: true }
-    // );
-
-    // const token = jwt.sign({ id: user.id }, process.env.SECRET);
+    // return the access_token as json
     res.json({ data });
   } catch (err) {
     // log the error
@@ -41,13 +32,16 @@ exports.exchangeCode = async (req, res) => {
 };
 
 exports.exchangeAccessToken = async (req, res) => {
+  // pull the access_token out of the body
   const { accessToken } = req.body;
 
   try {
+    // use the access_token to get the user information from the github api
     const { data } = await axios.get('https://api.github.com/user', {
       headers: { Authorization: `token ${accessToken}` },
     });
 
+    // create or update the user information
     const [user] = await Users.upsert(
       {
         username: data.email,
@@ -57,6 +51,7 @@ exports.exchangeAccessToken = async (req, res) => {
       { returning: true }
     );
 
+    // use jsonwebtoken to create a token from the user id
     const token = jwt.sign({ id: user.id }, process.env.SECRET);
     res.json({ token, loggedIn: true });
   } catch (err) {
