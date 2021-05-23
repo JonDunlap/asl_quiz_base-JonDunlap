@@ -2,7 +2,65 @@ const querystring = require('querystring');
 const log = require('debug')('web:request');
 
 exports.renderLogin = (req, res) => {
-  res.render('login');
+  res.render('login', { username: '', password: '' });
+};
+
+// eslint-disable-next-line no-unused-vars
+exports.renderLoginFormWithErrors = (errors, req, res, next) => {
+  // get the data the user submitted
+  const { username, password } = req.body;
+
+  // send the title, type, and errors as variables to the view
+  res.render('login', { username, password, errors });
+};
+
+exports.renderSignup = (req, res) => {
+  res.render('signup', { username: '', password: '' });
+};
+
+// eslint-disable-next-line no-unused-vars
+exports.renderSignupFormWithErrors = (errors, req, res, next) => {
+  // get the data the user submitted
+  const { username, password } = req.body;
+
+  // send the title, type, and errors as variables to the view
+  res.render('signup', { username, password, errors });
+};
+
+exports.handleLogin = async (req, res) => {
+  // get the username and password from the request body
+  const { username, password } = req.body;
+
+  // make an api request to check if the user exists
+  const { token, loggedIn } = await req.API.post('/auth/login', {
+    username,
+    password,
+  });
+
+  // save the loggedIn state and token to the session
+  req.session.loggedIn = loggedIn;
+  req.session.token = token;
+
+  // go to the admin dashboard
+  res.redirect('/admin/quizzes/list');
+};
+
+exports.handleSignup = async (req, res) => {
+  // get the username and password from the request body
+  const { username, password } = req.body;
+
+  // make an api request to create the user
+  const { token, loggedIn } = await req.API.post('/auth/signup', {
+    username,
+    password,
+  });
+
+  // save the loggedIn state and token to the session
+  req.session.loggedIn = loggedIn;
+  req.session.token = token;
+
+  // go to the admin dashboard
+  res.redirect('/admin/quizzes/list');
 };
 
 exports.redirectToGithub = (req, res) => {
