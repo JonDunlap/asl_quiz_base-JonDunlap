@@ -6,8 +6,12 @@ const authCtrl = require('../controllers/auth');
 
 // POST /auth/exchange - receives a code and will exchange it for an access token
 router.post('/exchange', authCtrl.exchangeCode);
-// GET /auth/token - exchange the access token for user information
+// POST /auth/token - exchange the access token for user information
 router.post('/token', authCtrl.exchangeAccessToken);
+// GET /auth/login - login the user
+router.get('/login', authCtrl.findUser);
+// POST /auth/signup - create a new user
+router.post('/signup', authCtrl.createUser);
 
 // export the route from this file
 module.exports = router;
