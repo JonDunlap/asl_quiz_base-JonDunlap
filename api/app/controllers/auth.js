@@ -61,3 +61,41 @@ exports.exchangeAccessToken = async (req, res) => {
     res.status(401).json({ loggedIn: false });
   }
 };
+
+exports.findUser = async (req, res) => {
+  // pull the user information out of the body
+  const { username, password } = req.body;
+
+  try {
+    // find the user by username and password
+    const user = await Users.findOne({ where: { username, password } });
+
+    // use jsonwebtoken to create a token from the user id
+    const token = jwt.sign({ id: user.id }, process.env.SECRET);
+    res.json({ token, loggedIn: true });
+  } catch (err) {
+    // log the error
+    error(err);
+    // send an unauthorized response if something above fails to work
+    res.status(401).json({ loggedIn: false });
+  }
+};
+
+exports.createUser = async (req, res) => {
+  // pull the user information out of the body
+  const { username, password } = req.body;
+
+  try {
+    // create the quiz
+    const newUser = await Users.create({ username, password, type: 'regular' });
+
+    // use jsonwebtoken to create a token from the user id
+    const token = jwt.sign({ id: newUser.id }, process.env.SECRET);
+    res.json({ token, loggedIn: true });
+  } catch (err) {
+    // log the error
+    error(err);
+    // send an unauthorized response if something above fails to work
+    res.status(401).json({ loggedIn: false });
+  }
+};
