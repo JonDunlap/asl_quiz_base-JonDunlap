@@ -70,6 +70,8 @@ exports.findUser = async (req, res) => {
     // find the user by username and password
     const user = await Users.findOne({ where: { username, password } });
 
+    // TODO - add error handling if there is no user found
+
     // use jsonwebtoken to create a token from the user id
     const token = jwt.sign({ id: user.id }, process.env.SECRET);
     res.json({ token, loggedIn: true });
@@ -86,8 +88,10 @@ exports.createUser = async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    // create the quiz
+    // create a new user with username, password, and a type of regular
     const newUser = await Users.create({ username, password, type: 'regular' });
+
+    // TODO - add error handling if the user already exists
 
     // use jsonwebtoken to create a token from the user id
     const token = jwt.sign({ id: newUser.id }, process.env.SECRET);
