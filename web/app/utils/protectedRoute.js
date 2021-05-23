@@ -5,7 +5,7 @@ const protectedRoute = (req, res, next) => {
   // if the user isn't logged in redirect them home
   if (!loggedIn) return res.redirect('/');
   // if the user is logged in go to the next middleware
-  return next;
+  return next();
 };
 
 // export the middleware function
