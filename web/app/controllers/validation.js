@@ -38,6 +38,16 @@ const checks = {
   choiceSelected: check('choiceId')
     .exists()
     .withMessage('You must select a choice.'),
+  userName: check('username')
+    .exists()
+    .withMessage('Username is required.')
+    .isLength(3)
+    .withMessage('Username is required to be at least 3 characters long.'),
+  password: check('password')
+    .exists()
+    .withMessage('Password is required.')
+    .isLength(3)
+    .withMessage('Password is required to be at least 3 characters long.'),
 };
 
 const checkForErrors = (req, res, next) => {
@@ -95,6 +105,14 @@ exports.validate = (method) => {
 
     case 'submitChoice': {
       return [checks.id, checks.choiceSelected, checkForErrors];
+    }
+
+    case 'createUser': {
+      return [checks.userName, checks.password, checkForErrors];
+    }
+
+    case 'loginUser': {
+      return [checks.userName, checks.password, checkForErrors];
     }
 
     default: {
