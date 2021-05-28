@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import API from '../API';
 
 export default function container(Component) {
@@ -19,7 +18,7 @@ export default function container(Component) {
         url: process.env.REACT_APP_CALLBACK_URL,
       });
 
-      <Redirect to={`/github/token?${data}`} />;
+      window.location = `/github/token?${data}`;
     };
 
     verifyGithubToken = async (accessToken) => {
@@ -40,7 +39,8 @@ export default function container(Component) {
           {...this.props}
           loggedIn={loggedIn}
           logout={this.logout}
-          verifySlackCode={this.verifyGithubCode}
+          verifyGithubCode={this.verifyGithubCode}
+          verifyGithubToken={this.verifyGithubToken}
         />
       );
     }
