@@ -31,7 +31,7 @@ class Login extends React.Component {
 
   render() {
     const { loggedIn } = this.props;
-    if (loggedIn) return <Redirect to='/admin/decisions' />;
+    if (loggedIn) return <Redirect to='/admin/quizzes' />;
 
     return (
       <>
@@ -40,7 +40,7 @@ class Login extends React.Component {
           <button
             type='button'
             onClick={this.redirectToGithub}
-            className={styles.button}
+            className={`${styles.button} ${styles.primary}`}
           >
             <i className='fab fa-github'>
               <span>Sign in with GitHub</span>
