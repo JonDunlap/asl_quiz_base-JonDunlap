@@ -21,13 +21,7 @@ class QuizList extends React.Component {
           {userQuizzes.map((quiz) => (
             <li className={styles.list__item} key={quiz.id}>
               <span className={styles.list__item__title}>{quiz.name}</span>
-              <Link url={`/quizzes/${quiz.id}`} />
-              <Link
-                url={`/admin/quizzes/${quiz.id}`}
-                title='Edit'
-                icon='fa-edit'
-                className='linkSecondary'
-              />
+              <Link url={`/admin/quizzes/${quiz.id}`} />
             </li>
           ))}
         </ul>
