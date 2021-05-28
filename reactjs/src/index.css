@@ -26,6 +26,23 @@ body {
   --error-color: #b00020;
 }
 
+/* 
+********* FONTS ***********
+ */
+/* FA import */
+@import url('https://use.fontawesome.com/releases/v5.6.3/css/all.css');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap');
+
+:root {
+  --default-font-family: 'Roboto', sans-serif;
+  --secondary-font-family: 'Montserrat', sans-serif;
+  --default-font: 200 18px/1.25em var(--default-font-family);
+}
+
+html {
+  font: var(--default-font);
+}
+
 .active {
   background-color: var(--active-color);
 }
@@ -68,19 +85,4 @@ body {
 
 .error__text {
   color: var(--error-color);
-}
-
-/* 
-********* FONTS ***********
- */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap');
-
-:root {
-  --default-font-family: 'Roboto', sans-serif;
-  --secondary-font-family: 'Montserrat', sans-serif;
-  --default-font: 200 18px/1.25em var(--default-font-family);
-}
-
-html {
-  font: var(--default-font);
 }
