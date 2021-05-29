@@ -19,14 +19,14 @@ class App extends Component {
         <div className={styles.body}>
           <Route path='/' component={Header} />
           <main className={styles.main__container}>
-            {/* <Route path='/' exact component={Landing} /> */}
+            <Route path='/' exact component={Landing} />
             <Route
               path='(/login|/github/callback|/github/token)'
               exact
               component={Login}
             />
-            {/* <Route path='/admin/quizzes' exact component={QuizList} /> */}
-            {/* <Switch>
+            <Route path='/admin/quizzes' exact component={QuizList} />
+            <Switch>
               <Route path='/admin/quizzes/new' exact component={QuizForm} />
               <Route
                 path='/admin/quizzes/edit/:id'
@@ -34,11 +34,15 @@ class App extends Component {
                 component={QuizForm}
               />
               <Route path='/admin/quizzes/:id' exact component={QuizDetail} />
-            </Switch> */}
-            {/* <Switch>
-              <Route path='/admin/options/new' exact component={QuestionForm} />
+            </Switch>
+            <Switch>
               <Route
-                path='/admin/options/edit/:id'
+                path='/admin/questions/new'
+                exact
+                component={QuestionForm}
+              />
+              <Route
+                path='/admin/questions/edit/:id'
                 exact
                 component={QuestionForm}
               />
@@ -47,15 +51,15 @@ class App extends Component {
                 exact
                 component={QuestionDetail}
               />
-            </Switch> */}
-            {/* <Switch>
+            </Switch>
+            <Switch>
               <Route path='/admin/choices/new' exact component={ChoiceForm} />
               <Route
                 path='/admin/choices/edit/:id'
                 exact
                 component={ChoiceForm}
               />
-            </Switch> */}
+            </Switch>
           </main>
         </div>
       </Router>
