@@ -28,6 +28,15 @@ export default function container(Component) {
       await API.delete(`/questions/${id}`);
     };
 
+    deleteChoice = async (id) => {
+      await API.delete(`/choices/${id}`);
+
+      const { choices } = this.state;
+      const newChoices = choices.filter((choice) => choice.id !== id);
+
+      this.setState({ choices: newChoices });
+    };
+
     render() {
       const { question, choices } = this.state;
 
@@ -40,6 +49,7 @@ export default function container(Component) {
           fetchQuestion={this.fetchQuestion}
           saveQuestion={this.saveQuestion}
           deleteQuestion={this.deleteQuestion}
+          deleteChoice={this.deleteChoice}
         />
       );
     }
