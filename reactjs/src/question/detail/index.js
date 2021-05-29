@@ -27,8 +27,6 @@ class QuestionDetail extends React.Component {
   };
 
   deleteChoice = async (choiceToDelete) => {
-    console.log('choiceToDelete :>> ', choiceToDelete);
-
     const { deleteChoice } = this.props;
 
     await deleteChoice(choiceToDelete.id);
@@ -60,11 +58,13 @@ class QuestionDetail extends React.Component {
           {choices.map((choice) => (
             <li className={styles.list__item} key={choice.id}>
               <span className={styles.list__item__title}>{choice.value}</span>
+              {/* Edit button */}
               <Link
                 url={`/admin/choices/edit/${choice.id}`}
                 title='Edit'
                 icon='fa-edit'
               />
+              {/* Delete button */}
               <span
                 onClick={this.deleteChoice.bind(this, choice)}
                 role='presentation'
@@ -72,12 +72,6 @@ class QuestionDetail extends React.Component {
               >
                 <i className='fa-trash fas' />
                 <span> Delete </span>
-
-                {/* <Link
-                  url={`/admin/questions/${question.id}`}
-                  title='Delete'
-                  icon='fa-trash'
-                /> */}
               </span>
             </li>
           ))}
