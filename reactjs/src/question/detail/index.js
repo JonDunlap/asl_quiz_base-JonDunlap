@@ -52,7 +52,11 @@ class QuestionDetail extends React.Component {
           {choices.map((choice) => (
             <li className={styles.list__item} key={choice.id}>
               <span className={styles.list__item__title}>{choice.value}</span>
-              <Link url={`/admin/choices/${choice.id}`} />
+              <Link
+                url={`/admin/choices/edit/${choice.id}`}
+                title='Edit'
+                icon='fa-edit'
+              />
             </li>
           ))}
         </ul>
