@@ -26,6 +26,19 @@
   composes: heading from '../brand.css';
 }
 
+.headingSecondary {
+  composes: headingSecondary from '../brand.css';
+}
+
 .button {
   composes: button from '../brand.css';
+}
+
+.link {
+  composes: link from '../brand.css';
+  cursor: pointer;
+}
+
+.linkSecondary {
+  composes: linkSecondary from '../brand.css';
 }

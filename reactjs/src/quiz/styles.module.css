@@ -26,6 +26,10 @@
   composes: heading from '../brand.css';
 }
 
+.headingSecondary {
+  composes: headingSecondary from '../brand.css';
+}
+
 .button {
   composes: button from '../brand.css';
 }
