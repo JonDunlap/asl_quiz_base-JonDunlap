@@ -29,3 +29,12 @@
 .button {
   composes: button from '../brand.css';
 }
+
+.link {
+  composes: link from '../brand.css';
+  cursor: pointer;
+}
+
+.linkSecondary {
+  composes: linkSecondary from '../brand.css';
+}

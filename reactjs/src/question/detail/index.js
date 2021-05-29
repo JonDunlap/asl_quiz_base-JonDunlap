@@ -26,6 +26,14 @@ class QuestionDetail extends React.Component {
     await deleteQuestion(id);
   };
 
+  deleteChoice = async (choiceToDelete) => {
+    console.log('choiceToDelete :>> ', choiceToDelete);
+
+    const { deleteChoice } = this.props;
+
+    await deleteChoice(choiceToDelete.id);
+  };
+
   render() {
     const { question, choices } = this.props;
 
@@ -57,6 +65,20 @@ class QuestionDetail extends React.Component {
                 title='Edit'
                 icon='fa-edit'
               />
+              <span
+                onClick={this.deleteChoice.bind(this, choice)}
+                role='presentation'
+                className={`${styles.linkSecondary} ${styles.link}`}
+              >
+                <i className='fa-trash fas' />
+                <span> Delete </span>
+
+                {/* <Link
+                  url={`/admin/questions/${question.id}`}
+                  title='Delete'
+                  icon='fa-trash'
+                /> */}
+              </span>
             </li>
           ))}
         </ul>
@@ -76,6 +98,7 @@ QuestionDetail.propTypes = {
   choices: PropTypes.arrayOf(PropTypes.object),
   fetchQuestion: PropTypes.func.isRequired,
   deleteQuestion: PropTypes.func.isRequired,
+  deleteChoice: PropTypes.func.isRequired,
   match: RRPropTypes.match.isRequired,
 };
 
