@@ -52,8 +52,14 @@ class ChoiceForm extends Component {
     // get the quiz id from the query params
     const questionId = queryParams.get('questionId');
 
-    await saveChoice({ id, value, type, questionId });
-    history.push(`/admin/questions/${questionId}`);
+    let data;
+    // check for questionId on query params,
+    // if there is no query params then we are editing a question
+    // otherwise we are creating a new question
+    if (!questionId) data = await saveChoice({ id, value, type });
+    else data = await saveChoice({ value, type, questionId });
+
+    history.push(`/admin/questions/${data.questionId}`);
   };
 
   render() {

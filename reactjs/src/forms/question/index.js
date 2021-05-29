@@ -51,8 +51,15 @@ class QuestionForm extends Component {
     // get the quiz id from the query params
     const quizId = queryParams.get('quizId');
 
-    await saveQuestion({ id, title, quizId });
-    history.push(`/admin/quizzes/${quizId}`);
+    let data;
+
+    // check for quizId on query params,
+    // if there is no query params then we are editing a question
+    // otherwise we are creating a new question
+    if (!quizId) data = await saveQuestion({ id, title });
+    else data = await saveQuestion({ title, quizId });
+
+    history.push(`/admin/questions/${data.id}`);
   };
 
   render() {
