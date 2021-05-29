@@ -18,7 +18,7 @@ class QuizDetail extends React.Component {
     fetchQuiz(id);
   }
 
-  delete = async () => {
+  deleteQuiz = async () => {
     const {
       deleteQuiz,
       quiz: { id },
@@ -33,13 +33,12 @@ class QuizDetail extends React.Component {
       <>
         <h1 className={styles.heading}>
           {quiz.name}
-          <Link url={`/quizzes/${quiz.id}`} />
           <Link
             url={`/admin/quizzes/edit/${quiz.id}`}
             title='Edit'
             icon='fa-edit'
           />
-          <span onClick={this.delete} role='presentation'>
+          <span onClick={this.deleteQuiz} role='presentation'>
             <Link
               url='/admin/quizzes/'
               title='Delete'
@@ -53,11 +52,7 @@ class QuizDetail extends React.Component {
           {questions.map((question) => (
             <li className={styles.list__item} key={question.id}>
               <span className={styles.list__item__title}>{question.title}</span>
-              <Link
-                url={`/admin/questions/edit/${question.id}?quizId=${quiz.id}`}
-                title='Edit'
-                icon='fa-edit'
-              />
+              <Link url={`/admin/questions/${question.id}`} />
             </li>
           ))}
         </ul>
