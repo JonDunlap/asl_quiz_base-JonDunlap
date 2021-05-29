@@ -26,6 +26,12 @@ class QuizDetail extends React.Component {
     await deleteQuiz(id);
   };
 
+  deleteQuestion = async (questionToDelete) => {
+    const { deleteQuestion } = this.props;
+
+    await deleteQuestion(questionToDelete.id);
+  };
+
   render() {
     const { quiz, questions } = this.props;
 
@@ -52,7 +58,17 @@ class QuizDetail extends React.Component {
           {questions.map((question) => (
             <li className={styles.list__item} key={question.id}>
               <span className={styles.list__item__title}>{question.title}</span>
+              {/* View Button */}
               <Link url={`/admin/questions/${question.id}`} />
+              {/* Delete button */}
+              <span
+                onClick={this.deleteQuestion.bind(this, question)}
+                role='presentation'
+                className={`${styles.linkSecondary} ${styles.link}`}
+              >
+                <i className='fa-trash fas' />
+                <span> Delete </span>
+              </span>
             </li>
           ))}
         </ul>
@@ -72,6 +88,7 @@ QuizDetail.propTypes = {
   questions: PropTypes.arrayOf(PropTypes.object),
   fetchQuiz: PropTypes.func.isRequired,
   deleteQuiz: PropTypes.func.isRequired,
+  deleteQuestion: PropTypes.func.isRequired,
   match: RRPropTypes.match.isRequired,
 };
 
