@@ -15,6 +15,14 @@ class Landing extends React.Component {
 
     return (
       <>
+        <h1 className={styles.heading}>Welcome to Back-end Learning!</h1>
+        <h2 className={styles.headingSecondary}>
+          Want to improve your back-end development skills?
+        </h2>
+        <p>
+          Check out the quizzes created by other users below for fun challenges
+        </p>
+
         <h1 className={styles.heading}>Public Quizzes</h1>
         <ul className={styles.list}>
           {publicQuizzes.map((quiz) => (
