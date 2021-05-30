@@ -12,6 +12,30 @@ export default function container(Component) {
       this.setState({ loggedIn: false });
     };
 
+    loginUser = async (user) => {
+      const { username, password } = user;
+
+      const { token, loggedIn } = await API.post('/auth/login', {
+        username,
+        password,
+      });
+
+      localStorage.setItem('token', token);
+      this.setState({ loggedIn });
+    };
+
+    signUpUser = async (user) => {
+      const { username, password } = user;
+
+      const { token, loggedIn } = await API.post('/auth/login', {
+        username,
+        password,
+      });
+
+      localStorage.setItem('token', token);
+      this.setState({ loggedIn });
+    };
+
     verifyGithubCode = async (code) => {
       const { data } = await API.post('/auth/exchange', {
         code,
@@ -39,6 +63,8 @@ export default function container(Component) {
           {...this.props}
           loggedIn={loggedIn}
           logout={this.logout}
+          loginUser={this.loginUser}
+          signUpUser={this.signUpUser}
           verifyGithubCode={this.verifyGithubCode}
           verifyGithubToken={this.verifyGithubToken}
         />
