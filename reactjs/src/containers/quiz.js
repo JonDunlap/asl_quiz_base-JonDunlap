@@ -9,6 +9,7 @@ export default function container(Component) {
       questions: [],
     };
 
+    // Get the quiz by id as well as its questions
     fetchQuiz = async (id) => {
       // get the details of the quiz
       const quiz = await API.get(`/quizzes/${id}`);
@@ -17,6 +18,8 @@ export default function container(Component) {
       this.setState({ quiz, questions });
     };
 
+    // Checks for a quiz id, updates current quiz if there is one,
+    // otherwise creates a new quiz
     saveQuiz = async (quiz) => {
       if (quiz.id) {
         return API.put(`/quizzes/${quiz.id}`, quiz);
@@ -24,10 +27,13 @@ export default function container(Component) {
       return API.post('/quizzes', quiz);
     };
 
+    // Deletes quiz by id
     deleteQuiz = async (id) => {
       await API.delete(`/quizzes/${id}`);
     };
 
+    // Deletes a question by id, updates the current state of the questions
+    // to show the user an updated view of the state
     deleteQuestion = async (id) => {
       await API.delete(`/questions/${id}`);
 

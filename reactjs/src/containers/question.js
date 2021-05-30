@@ -9,6 +9,7 @@ export default function container(Component) {
       choices: [],
     };
 
+    // Get the question by id as well as its choices
     fetchQuestion = async (id) => {
       // get the details of the question
       const question = await API.get(`/questions/${id}`);
@@ -17,6 +18,8 @@ export default function container(Component) {
       this.setState({ question, choices });
     };
 
+    // Checks for a question id, updates current question if there is one,
+    // otherwise creates a new question
     saveQuestion = async (question) => {
       if (question.id) {
         return API.put(`/questions/${question.id}`, question);
@@ -24,10 +27,13 @@ export default function container(Component) {
       return API.post('/questions', question);
     };
 
+    // Deletes question by id
     deleteQuestion = async (id) => {
       await API.delete(`/questions/${id}`);
     };
 
+    // Deletes a choice by id, updates the current state of the choices
+    // to show the user an updated view of the state
     deleteChoice = async (id) => {
       await API.delete(`/choices/${id}`);
 

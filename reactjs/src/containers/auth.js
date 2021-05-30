@@ -7,11 +7,14 @@ export default function container(Component) {
       loggedIn: !!localStorage.getItem('token'),
     };
 
+    // Logout function, removes token from local storage and sets loggedIn to false
     logout = () => {
       localStorage.removeItem('token');
       this.setState({ loggedIn: false });
     };
 
+    // Login with username and password, receives a token and loggedIn status from the server
+    // set the token in the local storage and set the state to loggedIn
     loginUser = async (user) => {
       const { username, password } = user;
 
@@ -24,6 +27,8 @@ export default function container(Component) {
       this.setState({ loggedIn });
     };
 
+    // Signup with username and password, receives a token and loggedIn status from the server
+    // set the token in the local storage and set the state to loggedIn
     signUpUser = async (user) => {
       const { username, password } = user;
 
@@ -36,6 +41,7 @@ export default function container(Component) {
       this.setState({ loggedIn });
     };
 
+    // Callback route from GitHub, receives a code and exchanges it for an access token
     verifyGithubCode = async (code) => {
       const { data } = await API.post('/auth/exchange', {
         code,
@@ -45,6 +51,9 @@ export default function container(Component) {
       window.location = `/github/token?${data}`;
     };
 
+    // Send the access token to the GitHub API and get back the user information
+    // receives a token and loggedIn status from the server
+    // set the token in the local storage and set the state to loggedIn
     verifyGithubToken = async (accessToken) => {
       const { token, loggedIn } = await API.post('/auth/token', {
         accessToken,
