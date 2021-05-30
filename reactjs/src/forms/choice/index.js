@@ -36,6 +36,7 @@ class ChoiceForm extends Component {
     });
   };
 
+  // Create/edit choice from the form
   save = async (event) => {
     // don't actually submit the form through the browser
     event.preventDefault();
