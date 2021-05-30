@@ -25,6 +25,7 @@ class Login extends React.Component {
     });
   };
 
+  // Sends username and password to the HOC for signup
   signUp = async (event) => {
     // don't actually submit the form through the browser
     event.preventDefault();
