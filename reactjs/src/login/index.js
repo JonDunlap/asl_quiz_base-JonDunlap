@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import RRPropTypes from 'react-router-prop-types';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link as RRLink } from 'react-router-dom';
 import styles from './styles.module.css';
 import AuthContainer from '../containers/auth';
 
@@ -71,7 +71,7 @@ class Login extends React.Component {
 
     return (
       <>
-        <h1>Login</h1>
+        <h1 className={styles.heading}>Login</h1>
         <form method='POST' className={styles.form} onSubmit={this.login}>
           <label className={styles.form__label} htmlFor='username'>
             Username/Email
@@ -97,13 +97,12 @@ class Login extends React.Component {
           </label>
           <button
             type='submit'
-            className={[styles.button, styles.active].join(' ')}
+            className={`${styles.button} ${styles.primary}`}
           >
             Login
           </button>
         </form>
-
-        <div>
+        <div className={styles.form}>
           <button
             type='button'
             onClick={this.redirectToGithub}
@@ -113,6 +112,10 @@ class Login extends React.Component {
               <span>Sign in with GitHub</span>
             </i>
           </button>
+          {/* send to signup form */}
+          <RRLink to='/signup' className={`${styles.button} ${styles.primary}`}>
+            Sign up
+          </RRLink>
         </div>
       </>
     );
