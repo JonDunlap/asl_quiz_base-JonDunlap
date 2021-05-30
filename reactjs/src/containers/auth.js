@@ -27,7 +27,7 @@ export default function container(Component) {
     signUpUser = async (user) => {
       const { username, password } = user;
 
-      const { token, loggedIn } = await API.post('/auth/login', {
+      const { token, loggedIn } = await API.post('/auth/signup', {
         username,
         password,
       });
