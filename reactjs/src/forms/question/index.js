@@ -35,6 +35,7 @@ class QuestionForm extends Component {
     });
   };
 
+  // Create/edit question from the form
   save = async (event) => {
     // don't actually submit the form through the browser
     event.preventDefault();
