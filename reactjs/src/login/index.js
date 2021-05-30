@@ -40,6 +40,7 @@ class Login extends React.Component {
     });
   };
 
+  // Login with username and password, call loginUser function from HOC
   login = async (event) => {
     // don't actually submit the form through the browser
     event.preventDefault();
@@ -50,6 +51,9 @@ class Login extends React.Component {
     await loginUser({ username, password });
   };
 
+  // After clicking login with GitHub button, takes the user to GitHub to authorize app
+  // This function creates a link with the client id, callback url, and scope of the request
+  // then takes the user to the GitHub link
   redirectToGithub = () => {
     let GITHUB_URL = 'https://github.com/login/oauth/authorize?';
     GITHUB_URL += `client_id=${process.env.REACT_APP_CLIENT_ID}`;
