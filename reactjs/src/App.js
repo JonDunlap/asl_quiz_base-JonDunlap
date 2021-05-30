@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import styles from './app.module.css';
 import Header from './header';
 import Login from './login';
+import SignUpForm from './forms/signup';
 import QuizList from './quiz/list';
 import Landing from './quiz/landing';
 import QuizDetail from './quiz/detail';
@@ -25,6 +26,7 @@ class App extends Component {
               exact
               component={Login}
             />
+            <Route path='/signup' exact component={SignUpForm} />
             <Route path='/admin/quizzes' exact component={QuizList} />
             <Switch>
               <Route path='/admin/quizzes/new' exact component={QuizForm} />
