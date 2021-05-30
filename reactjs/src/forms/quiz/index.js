@@ -36,6 +36,7 @@ class QuizForm extends Component {
     });
   };
 
+  // Create/edit quiz from the form
   save = async (event) => {
     // don't actually submit the form through the browser
     event.preventDefault();
@@ -45,7 +46,9 @@ class QuizForm extends Component {
       history,
     } = this.props;
     const { name, type = 'public' } = this.state;
+    // save the quiz and return the json data from the server
     const data = await saveQuiz({ id, name, type });
+    // use the data to go to the quiz page for this new quiz
     history.push(`/admin/quizzes/${data.id}`);
   };
 
