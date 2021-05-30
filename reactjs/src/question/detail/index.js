@@ -18,6 +18,7 @@ class QuestionDetail extends React.Component {
     fetchQuestion(id);
   }
 
+  // Delete question by id
   deleteQuestion = async () => {
     const {
       deleteQuestion,
@@ -26,6 +27,7 @@ class QuestionDetail extends React.Component {
     await deleteQuestion(id);
   };
 
+  // Delete choice by id
   deleteChoice = async (choiceToDelete) => {
     const { deleteChoice } = this.props;
 
