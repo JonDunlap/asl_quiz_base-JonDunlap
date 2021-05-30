@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link as RRLink } from 'react-router-dom';
 import styles from './styles.module.css';
 
+// Link 'mixin' for creating links used throughout the application
 function Link({ url, title, icon, className }) {
   return (
     <RRLink to={url} className={[styles[className], styles.link].join(' ')}>
