@@ -48,7 +48,7 @@ class Login extends React.Component {
 
     return (
       <>
-        <h1>Signup</h1>
+        <h1 className={styles.heading}>Signup</h1>
         <form method='POST' className={styles.form} onSubmit={this.signUp}>
           <label className={styles.form__label} htmlFor='username'>
             Username/Email
