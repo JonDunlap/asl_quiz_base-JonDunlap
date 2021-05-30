@@ -6,6 +6,14 @@ import styles from './styles.module.css';
 import AuthContainer from '../containers/auth';
 
 class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: undefined,
+      password: undefined,
+    };
+  }
+
   componentDidMount() {
     const { location, verifyGithubCode, verifyGithubToken } = this.props;
     // get the query params from the url query string
@@ -20,6 +28,28 @@ class Login extends React.Component {
     if (accessToken) verifyGithubToken(accessToken);
   }
 
+  handleInputChange = (event) => {
+    // pull the name of the input and value of input out of the event object
+    const {
+      target: { name, value },
+    } = event;
+    // update the state to a key of the name of the input and value of the input
+    // ex: type: 'private'
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  login = async (event) => {
+    // don't actually submit the form through the browser
+    event.preventDefault();
+
+    const { loginUser } = this.props;
+
+    const { username, password } = this.state;
+    await loginUser({ username, password });
+  };
+
   redirectToGithub = () => {
     let GITHUB_URL = 'https://github.com/login/oauth/authorize?';
     GITHUB_URL += `client_id=${process.env.REACT_APP_CLIENT_ID}`;
@@ -30,12 +60,49 @@ class Login extends React.Component {
   };
 
   render() {
-    const { loggedIn } = this.props;
+    const {
+      loggedIn,
+      username: defaultUsername = '',
+      password: defaultPassword = '',
+    } = this.props;
+    const { username = defaultUsername, password = defaultPassword } =
+      this.state;
     if (loggedIn) return <Redirect to='/admin/quizzes' />;
 
     return (
       <>
         <h1>Login</h1>
+        <form method='POST' className={styles.form} onSubmit={this.login}>
+          <label className={styles.form__label} htmlFor='username'>
+            Username/Email
+            <input
+              type='text'
+              name='username'
+              value={username}
+              className={styles.form__input}
+              id='username'
+              onChange={this.handleInputChange}
+            />
+          </label>
+          <label className={styles.form__label} htmlFor='password'>
+            Password
+            <input
+              type='password'
+              name='password'
+              value={password}
+              className={styles.form__input}
+              id='password'
+              onChange={this.handleInputChange}
+            />
+          </label>
+          <button
+            type='submit'
+            className={[styles.button, styles.active].join(' ')}
+          >
+            Login
+          </button>
+        </form>
+
         <div>
           <button
             type='button'
@@ -54,6 +121,9 @@ class Login extends React.Component {
 
 Login.propTypes = {
   loggedIn: PropTypes.bool,
+  username: PropTypes.string,
+  password: PropTypes.string,
+  loginUser: PropTypes.func.isRequired,
   verifyGithubCode: PropTypes.func.isRequired,
   verifyGithubToken: PropTypes.func.isRequired,
   location: RRPropTypes.location.isRequired,
@@ -61,6 +131,8 @@ Login.propTypes = {
 
 Login.defaultProps = {
   loggedIn: false,
+  username: '',
+  password: '',
 };
 
 export default AuthContainer(Login);
