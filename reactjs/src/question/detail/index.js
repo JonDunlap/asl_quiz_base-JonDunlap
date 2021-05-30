@@ -57,6 +57,13 @@ class QuestionDetail extends React.Component {
         <ul className={styles.list}>
           {choices.map((choice) => (
             <li className={styles.list__item} key={choice.id}>
+              {/* Logic to add '√' or 'X' to correct or incorrect choice type */}
+              {choice.type === 'correct' && (
+                <i className='fas fa-check active__text' />
+              )}
+              {choice.type === 'incorrect' && (
+                <i className='fas fa-times primary__text' />
+              )}
               <span className={styles.list__item__title}>{choice.value}</span>
               {/* Edit button */}
               <Link
