@@ -98,6 +98,10 @@
   composes: button from '../brand.css';
 }
 
-.active {
-  composes: active from '../brand.css';
+.primary {
+  background-color: var(--primary-color);
+}
+
+.heading {
+  composes: heading from '../brand.css';
 }
