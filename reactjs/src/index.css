@@ -86,3 +86,7 @@ html {
 .error__text {
   color: var(--error-color);
 }
+
+.fas {
+  margin-right: 0.5em;
+}
