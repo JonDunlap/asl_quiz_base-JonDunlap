@@ -70,8 +70,5 @@ exports.renderAdminDetail = async (req, res) => {
   // get the choices for this question
   const choices = await req.API.get(`/choices?questionId=${id}`);
 
-  //! DEBUG - used to show buttons for logged in user
-  const loggedIn = true;
-
-  res.render('questions/detail', { question, choices, loggedIn });
+  res.render('questions/detail', { question, choices });
 };

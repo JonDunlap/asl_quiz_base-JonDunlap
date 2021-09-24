@@ -1,5 +1,9 @@
 {
   "env": {
-    "DEBUG": "web:*"
-  }
+    "DEBUG": "web:*",
+    "SECRET": "N4XXLLJgXzImzqapZKnCvbPie6QmUOOXqJQ2T2eT6Fvehe5RPG0MlBWG3iHSAtQklTd4SUQBOj54vQNd3R82ikhcQD6GjTwkkPRrP74koAPwXE2rzGsMsTAZWwPVnYZSKuswSwXkMjs5WktUQv60506weToNsoxS8JEZux4N4fIS5sc4oyfKHROeG7K7QVip25VgwLi74RhtYUXNaDuJHS97C1A8GTJdcAQsScHr7j8tNOXEOO6roPTunM",
+    "CLIENT_ID": "c932d4d8598834ace586",
+    "CALLBACK_URL": "http://localhost:3000/github/callback"
+  },
+  "ignore": "sessions"
 }
