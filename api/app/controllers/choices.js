@@ -2,29 +2,25 @@
 const { Choices } = require('../models');
 
 // get all the choices for a question
-exports.getChoicesByQuestionId = (req, res) => {
+exports.getChoicesByQuestionId = async (req, res) => {
   // get the question id from the request query
   const { questionId } = req.query;
 
   // run the get all function from the model
-  const choices = Choices.getAll();
-
   // filter the choices to only the ones from the question
-  const questionChoices = choices.filter(
-    (choice) => choice.questionId === questionId
-  );
+  const questionChoices = await Choices.findAll({ where: { questionId } });
 
   // respond with json of the choices from this question
   res.json(questionChoices);
 };
 
 // get a choice by id
-exports.getChoice = (req, res) => {
+exports.getChoice = async (req, res) => {
   // get the id from the route parameters
   const { id } = req.params;
 
   // search our model for the choice
-  const choice = Choices.getOneById(id);
+  const choice = await Choices.findByPk(id);
 
   // if no choice is found
   if (!choice) {
@@ -39,36 +35,51 @@ exports.getChoice = (req, res) => {
 };
 
 // create a new choice
-exports.createChoice = (req, res) => {
+exports.createChoice = async (req, res) => {
   // get the value, type, and questionId from the request body
   const { value, type, questionId } = req.body;
 
-  // create the choice and save the id returned from the model
-  const id = Choices.createNewItem({ value, type, questionId });
+  try {
+    // create the choice
+    const newChoice = await Choices.create({ value, type, questionId });
 
-  // send the new id back in json
-  res.json(id);
+    // send the new choice back in json
+    res.json(newChoice);
+  } catch (e) {
+    const errors = e.errors.map((err) => err.message);
+    res.status(400).json({ errors });
+  }
 };
 
 // update an existing choice
-exports.updateChoice = (req, res) => {
+exports.updateChoice = async (req, res) => {
   // get the id from the request parameters
   const { id } = req.params;
 
-  // update the choice
-  const updatedChoice = Choices.updateItem(req.body, id);
+  try {
+    // update the choice
+    const [, [updatedChoice]] = await Choices.update(req.body, {
+      // only update the row using the id in the url
+      where: { id },
+      // return the updated row
+      returning: true,
+    });
 
-  // send the updated choice back in json
-  res.json(updatedChoice);
+    // send the updated choice back in json
+    res.json(updatedChoice);
+  } catch (e) {
+    const errors = e.errors.map((err) => err.message);
+    res.status(400).json({ errors });
+  }
 };
 
 // delete a choice
-exports.deleteChoice = (req, res) => {
+exports.deleteChoice = async (req, res) => {
   // get the id from the request parameters
   const { id } = req.params;
 
   // delete the choice
-  Choices.deleteItem(id);
+  await Choices.destroy({ where: { id } });
 
   // send a good status code
   res.sendStatus(204);

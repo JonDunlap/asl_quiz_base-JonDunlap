@@ -1,0 +1,17 @@
+extends _layout
+block content
+	h1.heading Login
+	form.form(method="POST")
+		label.form__label Username/Email
+			input.form__input(type="text", name="username", value=username)
+		label.form__label Password
+			input.form__input(type="text", name="password", value=password)
+		button.button.active(type="submit") Login
+		if errors
+			for error in errors
+				small.flash=error.msg		
+		a.button.primary(href='/login/github')
+			i.fab.fa-github
+			span &nbsp; Sign in with GitHub
+		a.button.primary(href='/signup')
+			span &nbsp; Sign up

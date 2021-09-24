@@ -1,0 +1,92 @@
+/* 
+************* GLOBAL ***************
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+/* 
+********* COLORS ***********
+ */
+:root {
+  --active-color: #4a148c;
+  --primary-color: #7c43bd;
+  --secondary-color: #b388ff;
+  --text-color: #fff;
+  --light-text-color: #000;
+  --background-color: #12005e;
+  --border-color: #805acb;
+  --secondary-background-color: #fff;
+  --error-color: #b00020;
+}
+
+/* 
+********* FONTS ***********
+ */
+/* FA import */
+@import url('https://use.fontawesome.com/releases/v5.6.3/css/all.css');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap');
+
+:root {
+  --default-font-family: 'Roboto', sans-serif;
+  --secondary-font-family: 'Montserrat', sans-serif;
+  --default-font: 200 18px/1.25em var(--default-font-family);
+}
+
+html {
+  font: var(--default-font);
+}
+
+.active {
+  background-color: var(--active-color);
+}
+
+.active__text {
+  color: var(--active-color);
+}
+
+.primary {
+  background-color: var(--primary-color);
+}
+
+.primary__text {
+  color: var(--primary-color);
+}
+
+.secondary {
+  background-color: var(--secondary-color);
+}
+
+.secondary__text {
+  color: var(--secondary-color);
+}
+
+.text {
+  color: var(--text-color);
+}
+
+.background {
+  background-color: var(--background-color);
+}
+
+.border {
+  border: 1px solid var(--border-color);
+}
+
+.error {
+  background-color: var(--error-color);
+}
+
+.error__text {
+  color: var(--error-color);
+}
+
+.fas {
+  margin-right: 0.5em;
+}
