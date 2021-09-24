@@ -2,49 +2,32 @@
 const { Quizzes } = require('../models');
 
 // get all the quizzes for a given user
-exports.getAllQuizzes = (req, res) => {
-  // get the userId from the request body
-  // const { userId } = req.body;
-
+exports.getAllQuizzes = async (req, res) => {
   // run the get all function from the model
-  const quizzes = Quizzes.getAll();
-
   // filter the quizzes to only the ones from this user
-  // const userQuizzes = quizzes.filter((quiz) => quiz.userId === userId);
+  const quizzes = await Quizzes.findAll({ where: { userId: req.userId } });
 
   // respond with json of the quizzes for this user
-  // res.json(userQuizzes);
   res.json(quizzes);
 };
 
-// get all the quizzes with a type of public for a particular user
-exports.getPublicQuizzes = (req, res) => {
-  // get the user id from the request body
-  // const { userId } = req.body;
-
+// get all the quizzes with a type of public
+exports.getPublicQuizzes = async (req, res) => {
   // run the get all function from the model
-  const quizzes = Quizzes.getAll();
-
   // filter the quizzes to only include the ones with a type of 'public'
-  // and that are from the user
-  /*   
-	const publicQuizzes = quizzes.filter(
-    (quiz) => quiz.type === 'public' && quiz.userId === userId
-  ); 
-	*/
-  const publicQuizzes = quizzes.filter((quiz) => quiz.type === 'public');
+  const publicQuizzes = await Quizzes.findAll({ where: { type: 'public' } });
 
   // respond with json of the public quizzes
   res.json(publicQuizzes);
 };
 
 // get a quiz by id
-exports.getQuiz = (req, res) => {
+exports.getQuiz = async (req, res) => {
   // get the id from the route parameters
   const { id } = req.params;
 
   // search our model for the quiz
-  const quiz = Quizzes.getOneById(id);
+  const quiz = await Quizzes.findByPk(id);
 
   // if no quiz is found
   if (!quiz) {
@@ -59,36 +42,48 @@ exports.getQuiz = (req, res) => {
 };
 
 // create a new quiz
-exports.createQuiz = (req, res) => {
-  // get the name, type, and userId from the request body
-  const { name, type, userId } = req.body;
+exports.createQuiz = async (req, res) => {
+  // get the name, type from the request body
+  const { name, type } = req.body;
 
-  // create the quiz and save the id returned from the model
-  const id = Quizzes.createNewItem({ name, type, userId });
+  try {
+    // create the quiz
+    const newQuiz = await Quizzes.create({ name, type, userId: req.userId });
 
-  // send the new id back in json
-  res.json({ id, name, type, userId });
+    // send the new quiz back in json
+    res.json(newQuiz);
+  } catch (e) {
+    const errors = e.errors.map((err) => err.message);
+    res.status(400).json({ errors });
+  }
 };
 
 // update an existing quiz
-exports.updateQuiz = (req, res) => {
+exports.updateQuiz = async (req, res) => {
   // get the id from the request parameters
   const { id } = req.params;
 
-  // update the quiz
-  const updatedQuiz = Quizzes.updateItem(req.body, id);
-
-  // send the updated quiz back in json
-  res.json(updatedQuiz);
+  try {
+    // update the quiz
+    const [, [updatedQuiz]] = await Quizzes.update(req.body, {
+      where: { id },
+      returning: true,
+    });
+    // send the updated quiz back in json
+    res.json(updatedQuiz);
+  } catch (e) {
+    const errors = e.errors.map((err) => err.message);
+    res.status(400).json({ errors });
+  }
 };
 
 // delete a quiz
-exports.deleteQuiz = (req, res) => {
+exports.deleteQuiz = async (req, res) => {
   // get the id from the request parameters
   const { id } = req.params;
 
   // delete the quiz
-  Quizzes.deleteItem(id);
+  await Quizzes.destroy({ where: { id } });
 
   // send a good status code
   res.sendStatus(204);

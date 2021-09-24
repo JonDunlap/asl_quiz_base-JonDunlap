@@ -2,29 +2,25 @@
 const { Questions } = require('../models');
 
 // get all the questions from a quiz
-exports.getQuestionsByQuizId = (req, res) => {
+exports.getQuestionsByQuizId = async (req, res) => {
   // get the quiz id from the request query
   const { quizId } = req.query;
 
   // run the get all function from the model
-  const questions = Questions.getAll();
-
   // filter the questions to only the ones from this quiz
-  const quizQuestions = questions.filter(
-    (question) => question.quizId === quizId
-  );
+  const quizQuestions = await Questions.findAll({ where: { quizId } });
 
   // respond with json of the questions from this quiz
   res.json(quizQuestions);
 };
 
 // get a question by id
-exports.getQuestion = (req, res) => {
+exports.getQuestion = async (req, res) => {
   // get the id from the route parameters
   const { id } = req.params;
 
   // search our model for the question
-  const question = Questions.getOneById(id);
+  const question = await Questions.findByPk(id);
 
   // if no question is found
   if (!question) {
@@ -39,36 +35,51 @@ exports.getQuestion = (req, res) => {
 };
 
 // create a new question
-exports.createQuestion = (req, res) => {
+exports.createQuestion = async (req, res) => {
   // get the title, and quizId from the request body
   const { title, quizId } = req.body;
 
-  // create the question and save the id returned from the model
-  const id = Questions.createNewItem({ title, quizId });
+  try {
+    // create the question
+    const newQuiz = await Questions.create({ title, quizId });
 
-  // send the new id back in json
-  res.json({ id, title, quizId });
+    // send the new id back in json
+    res.json(newQuiz);
+  } catch (e) {
+    const errors = e.errors.map((err) => err.message);
+    res.status(400).json({ errors });
+  }
 };
 
 // update an existing question
-exports.updateQuestion = (req, res) => {
+exports.updateQuestion = async (req, res) => {
   // get the id from the request parameters
   const { id } = req.params;
 
-  // update the question
-  const updatedQuestion = Questions.updateItem(req.body, id);
+  try {
+    // update the question
+    const [, [updatedQuestion]] = await Questions.update(req.body, {
+      // only update the row using the id in the url
+      where: { id },
+      // return the updated row
+      returning: true,
+    });
 
-  // send the updated question back in json
-  res.json(updatedQuestion);
+    // send the updated question back in json
+    res.json(updatedQuestion);
+  } catch (e) {
+    const errors = e.errors.map((err) => err.message);
+    res.status(400).json({ errors });
+  }
 };
 
 // delete a question
-exports.deleteQuestion = (req, res) => {
+exports.deleteQuestion = async (req, res) => {
   // get the id from the request parameters
   const { id } = req.params;
 
   // delete the question
-  Questions.deleteItem(id);
+  await Questions.destroy({ where: { id } });
 
   // send a good status code
   res.sendStatus(204);
