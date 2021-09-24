@@ -1,0 +1,3 @@
+node_modules/
+# Ignore Sequelize created index.js
+api/app/models/index.js

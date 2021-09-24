@@ -1,0 +1,11 @@
+header.header
+	.header__container 
+		h1
+			a.header__brand(href="/") Back-end Learning
+		.links
+			if loggedIn
+				a.header__link(href="/admin/quizzes/list") Dashboard
+				a.header__link(href="/admin/quizzes/new") Create a new quiz
+				a.header__link(href="/logout") Logout
+			else 
+				a.header__link(href="/login") Login

@@ -1,0 +1,18 @@
+extends ../_layout
+block content
+	h1.heading= id ? 'Edit Choice' : 'Create a New Choice'
+	form.form(method="POST")
+		label.form__label Choice Value
+			input.form__input(type="text", name="value", value=value)
+		label.form__label
+			span.form__labelInline Choice Type
+			label.form__labelInline
+				input.form__input__radio(type="radio", name="type", value="incorrect", checked=type === 'incorrect')
+				span Incorrect
+			label.form__labelInline
+				input.form__input__radio(type="radio", name="type", value="correct", checked=type === 'correct')
+				span Correct
+		button.button.active(type="submit")= id ? 'Edit Choice' : 'Create Choice'
+		if errors
+			for error in errors
+				small.flash=error.msg

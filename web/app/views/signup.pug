@@ -1,0 +1,12 @@
+extends _layout
+block content
+	h1.heading Signup
+	form.form(method="POST")
+		label.form__label Username/Email
+			input.form__input(type="text", name="username", value=username)
+		label.form__label Password
+			input.form__input(type="text", name="password", value=password)
+		button.button.active(type="submit") Signup
+		if errors
+			for error in errors
+				small.flash=error.msg
