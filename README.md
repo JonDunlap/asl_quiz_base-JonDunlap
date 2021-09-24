@@ -6,9 +6,11 @@
 
 **Name**: Jonathan Dunlap
 
-**Email**: [jdunlap1@student.fullsail.edu](mailto:jdunlap1@student.fullsail.edu)
+**Email**: [jon@jondunlap.com](mailto:jon@jondunlap.com)
 
-**Slack Username**: [jdunlap1](https://wdd.slack.com/team/U0179DQB84Q)
+**Portfolio Website**: [jondunlap.com](https://jondunlap.com)
+
+**Resume**: []
 
 ## Setting up the app
 
