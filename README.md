@@ -1,6 +1,14 @@
-# ASL
+# RESTful API - Quiz Application
 
-[Description]
+## Description:
+
+A quiz application created for a school project, features 2 separate front ends and a backend using PostgreSQL for storing the quiz data. The front ends are almost identical in functionality with the differences being that the original was created using a Node/Express server that uses Pug.js as the templating engine and also features protected front-end routes using JSON web tokens, the second version of the front end was built using React and makes use of React useEffect and an API middleware to interact with the backend API. On the back end the routes are built using Node and Express with Sequelize being used to model, seed, and interact with the PostgreSQL database. This application also makes use of custom oAuth authentication using GitHub as a method of authenticating the user.
+
+## Notes: 
+
+- The GitHub pages link only goes to the example that was provided by the instructors to give us inspiration and to help us build out our brand guide. For an actual example of the application you will need to actually clone this repo and follow the instructions for setting up the application. 
+- There is currently no route authentication on the React version of the front end and going to certain routes while not logged in will give an error rather than preventing the user from accessing those routes.
+- Error handling needs some work on the API server and there are instances where the application will crash rather than properly sending errors to the front end. 
 
 ## Created By:
 
@@ -10,7 +18,7 @@
 
 **Portfolio Website**: [jondunlap.com](https://jondunlap.com)
 
-**Resume**: []
+**Resume**: [https://standardresume.co/r/jondunlap](https://standardresume.co/r/jondunlap)
 
 ## Setting up the app
 
